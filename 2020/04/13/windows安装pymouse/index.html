@@ -16,37 +16,28 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+    <meta name="description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named &#39;windows&#39; 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装cuda 11  ,cudnn，pytorch 1.7">
-<meta property="og:url" content="https://zyweven.github.io/2020/11/23/%E5%AE%89%E8%A3%85cuda%2011%20%20,cudnn%EF%BC%8Cpytorch%201.7/index.html">
+<meta property="og:title" content="windows安装pymouse">
+<meta property="og:url" content="https://zyweven.github.io/2020/04/13/windows%E5%AE%89%E8%A3%85pymouse/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+<meta property="og:description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named &#39;windows&#39; 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center">
-<meta property="article:published_time" content="2020-11-23T10:13:18.000Z">
-<meta property="article:modified_time" content="2023-02-28T13:43:24.913Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413172042294.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200413172459656.png">
+<meta property="article:published_time" content="2020-04-13T09:26:52.000Z">
+<meta property="article:modified_time" content="2023-03-01T02:04:47.642Z">
 <meta property="article:author" content="even zhang">
-<meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="pymouse">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200413172042294.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>安装cuda 11  ,cudnn，pytorch 1.7 - Even</title>
+  <title>windows安装pymouse - Even</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">安装cuda 11  ,cudnn，pytorch 1.7</span>
+            <span id="subtitle">windows安装pymouse</span>
           
         </div>
 
@@ -223,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-11-23 18:13" pubdate>
-          2020年11月23日 晚上
+        <time datetime="2020-04-13 17:26" pubdate>
+          2020年4月13日 下午
         </time>
       </span>
     
@@ -235,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          536 字
         
       </span>
     
@@ -246,7 +237,7 @@
         
         
         
-          10 分钟
+          5 分钟
         
       </span>
     
@@ -292,87 +283,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">安装cuda 11  ,cudnn，pytorch 1.7</h1>
+            <h1 style="display: none">windows安装pymouse</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="安装-cuda">1. 安装 cuda</h2>
-<p>先康康电脑里面有没有</p>
-<p>nvcc -V</p>
-<p>结果当然是没有。</p>
-<p>要安装首选需要康康自己的显卡能支持到多少的 cuda</p>
+                <h1 id="安装pymouse">安装pymouse</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pymouse<br></code></pre></td></tr></table></figure>
+<p>遇到报错</p>
+<h2 id="modulenotfounderror-no-module-named-windows">ModuleNotFoundError: No module named 'windows'</h2>
+<p>此时需要下载一个叫 PyUserinput的包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install PyUserinput<br></code></pre></td></tr></table></figure>
+<p>但是遭遇</p>
+<h2 id="could-not-find-a-version-that-satisfies-the-requirement-pyhook-from-pyuserinput-from-versions-no-matching-distribution-found-for-pyhook-from-pyuserinput">Could not find a version that satisfies the requirement pyHook (from PyUserinput) (from versions: )No matching distribution found for pyHook (from PyUserinput)</h2>
 <figure>
-<img src="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+<img src="https://img-blog.csdnimg.cn/20200413172042294.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
 </figure>
-<p>打开这个（可以通过搜索直接搜到。）</p>
+<p>需要下载个pyHook ，不过明显不能通过pip直接下载了</p>
+<p>https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook</p>
+<p>去这个网址里面找到pyHook，下载符合自己python版本的whl文件在电脑上</p>
 <figure>
-<img src="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+<img src="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
 </figure>
-<p>点击系统信息</p>
+<p>然后cmd里面切换到该whl文件所在地方。</p>
+<p>输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyHook-<span class="hljs-number">1.5</span><span class="hljs-number">.1</span>-cp36-cp36m-win_amd64.whl<br>(因为我的python是<span class="hljs-number">3.6</span>版本的)<br></code></pre></td></tr></table></figure>
 <figure>
-<img src="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+<img src="https://img-blog.csdnimg.cn/20200413172459656.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
 </figure>
-<p>在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。</p>
-<p>想用新一点的，所以打算就直接安装 cuda11</p>
-<p>https://developer.nvidia.com/cuda-toolkit</p>
-<p>去官网下载</p>
-<p>进去发现直接就是11update。</p>
-<p>找了一下才找到以前的版本下载的位置。</p>
-<p><img src="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /></p>
-<p>这个就是我想要的版本</p>
-<p>挺大的，还好我的网速还不错。</p>
-<p>下载完毕直接安装就可以了。我下载在C盘里面。</p>
-<h2 id="cudnn下载">2.cudnn下载</h2>
-<p>https://developer.nvidia.com/rdp/cudnn-download</p>
-<p>去这里下载</p>
-<p>需要登录</p>
-<p>可以直接微信登录就完事了，比较方便。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>很明确的，就是下载这个</p>
-<p>下载好是个压缩包，解压后有这些东西</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>然后进入 C:FilesGPU Computing Toolkit.0</p>
-<p>将 bin include lib 都复制到这里面</p>
-<h3 id="验证是否安装成功-cuda-cudnn">验证是否安装成功 cuda cudnn</h3>
-<p>打开cmd</p>
-<p>cd C:FilesGPU Computing Toolkit.0_suite</p>
-<p>运行 bandwidthTest.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>运行 deviceQuery.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>有PASS就是OK的。</p>
-<h2 id="安装pytorch-1.7">安装pytorch 1.7</h2>
-<p>https://pytorch.org/</p>
-<p>直接去官网</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>选好后下载好就行了。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>参考： https://blog.csdn.net/qq_18620653/article/details/105329219</p>
-<hr />
-<p>时间 2021年5月15日</p>
-<p>网络不好 只能采取wheel的方式下载</p>
-<p>https://pytorch.org/get-started/previous-versions/</p>
-<p>https://download.pytorch.org/whl/torch_stable.html</p>
-<p>去上面的第二个网址通过浏览器下载需要的wheel会比用pip下载稳定点，至于要下载哪个就只有参考第一个网址，或者通过pip返回出来的那个名字找就行。 下载好之后，通过</p>
-<pre><code class="hljs">pip install torch-1.8.0+cu111-cp38-cp38-win_amd64.whl</code></pre>
-<p>安装就行了</p>
-<p>我这次下载的是1.8版本的</p>
-<p>链接：https://pan.baidu.com/s/1XBH5Zn5uPteURANU23taKA 提取码：mn3g</p>
-<p>就顺带上传到网盘里了。</p>
-<p>不过配套的 torchvision==0.9.0+cu111 torchaudio==0.8.0 就自己通过pip单独下载了。</p>
+<p>就下载好了</p>
+<p>这时再下载好PyUserinput就万事OK了</p>
+<p>pymouse也就可以用了</p>
 
                 
               </div>
@@ -391,7 +332,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/%E6%9D%82/" class="category-chain-item">杂</a>
   
   
 
@@ -406,9 +347,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
-      
-        <a href="/tags/pytorch/">#pytorch</a>
+        <a href="/tags/pymouse/">#pymouse</a>
       
     </div>
   
@@ -420,8 +359,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>安装cuda 11  ,cudnn，pytorch 1.7</div>
-      <div>https://zyweven.github.io/2020/11/23/安装cuda 11  ,cudnn，pytorch 1.7/</div>
+      <div>windows安装pymouse</div>
+      <div>https://zyweven.github.io/2020/04/13/windows安装pymouse/</div>
     </div>
     <div class="license-meta">
       
@@ -433,7 +372,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年11月23日</div>
+          <div>2020年4月13日</div>
         </div>
       
       
@@ -465,9 +404,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/30/Ubuntu%20%E8%87%AA%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%AF%94%E5%A6%82frp%EF%BC%89/" title="Ubuntu 自启动程序（比如frp）">
+                      <a href="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/" title="深度学习问答笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu 自启动程序（比如frp）</span>
+                        <span class="hidden-mobile">深度学习问答笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -475,8 +414,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/15/windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84ffmpeg%E5%AE%89%E8%A3%85/" title="windows平台上的ffmpeg安装">
-                        <span class="hidden-mobile">windows平台上的ffmpeg安装</span>
+                      <a href="/2020/03/26/windows%E4%BD%BF%E7%94%A8convert_torch%E8%BD%AC%E6%8D%A2%E6%A8%A1%E5%9E%8B/" title="windows使用convert_torch转换模型">
+                        <span class="hidden-mobile">windows使用convert_torch转换模型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

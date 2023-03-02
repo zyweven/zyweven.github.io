@@ -4,6 +4,81 @@
   
   
   <entry>
+    <title>【Go练习】TCP 端口扫描器</title>
+    <link href="/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/"/>
+    <url>/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="普通循环写法">普通循环写法</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.4.131.64:%d&quot;</span>, i)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>      &#125;  <br>      conn.Close()  <br>      fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>   &#125;  <br>&#125;<br></code></pre></td></tr></table></figure><h2 id="并发写法">并发写法</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;  <br>         <span class="hljs-keyword">defer</span> wg.Done()  <br>         address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, i)  <br>         conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>         <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>            fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>            <span class="hljs-keyword">return</span>  <br>         &#125;  <br>         conn.Close()  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>         <span class="hljs-comment">//wg.Done()  </span><br>      &#125;(i)  <br>   &#125;  <br>   wg.Wait()  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;\n\n 用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure><h2 id="worker池写法">worker池写法</h2><p>多线程写法，同时对端口号进行了排序，使用两个通道来分别接收关闭的端口和开启的端口。</p><p>[[image-20230302220833331.png]]</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">workerpool</span><span class="hljs-params">(ports <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, cresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, oresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, wg *sync.WaitGroup)</span></span> &#123;  <br>   <span class="hljs-keyword">defer</span> wg.Done()  <br>   <span class="hljs-keyword">for</span> port := <span class="hljs-keyword">range</span> ports &#123;  <br>      <span class="hljs-comment">//fmt.Println(port)  </span><br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, port)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         cresult &lt;- port  <br>         <span class="hljs-keyword">continue</span> <span class="hljs-comment">// 注意这个 避免conn为nil时还去关闭它</span><br>         <span class="hljs-comment">//fmt.Printf(&quot;%s 关闭了\n&quot;, address)  </span><br>      &#125; <span class="hljs-keyword">else</span> &#123;  <br>         oresult &lt;- port  <br>      &#125;  <br>      conn.Close()  <br>   &#125;  <br>&#125;  <br>  <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   nworker := <span class="hljs-number">20</span>  <br>   startPort := <span class="hljs-number">1</span>  <br>   endPort := <span class="hljs-number">1000</span>  <br>   cresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   oresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   ports := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">25</span>)  <br>   openports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>   closeports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> cresults &#123;  <br>    closeports = <span class="hljs-built_in">append</span>(closeports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> oresults &#123;  <br>    openports = <span class="hljs-built_in">append</span>(openports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; nworker; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> workerpool(ports, cresults, oresults, &amp;wg)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> i := startPort; i &lt; endPort; i++ &#123;  <br>      ports &lt;- i  <br>   &#125;  <br>   <span class="hljs-built_in">close</span>(ports)  <span class="hljs-comment">//把数据全部输入到ports之后关闭通道。</span><br>   wg.Wait()  <span class="hljs-comment">// 等待所有的 worker 完成任务</span><br>   <span class="hljs-built_in">close</span>(oresults)   <span class="hljs-comment">//这两个通道应该是在worker工作完之后才关闭</span><br>   <span class="hljs-built_in">close</span>(cresults)  <br>   sort.Ints(closeports)  <br>   sort.Ints(openports)  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> openports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 开\n&quot;</span>, i)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> closeports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 关\n&quot;</span>, i)  <br>   &#125;  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;一共用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Go</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go练习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【Go基础】Go安装</title>
+    <link href="/2023/03/01/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91Go%E5%AE%89%E8%A3%85/"/>
+    <url>/2023/03/01/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91Go%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<p>https://go.dev/dl/</p><h2 id="windows">Windows</h2><p>直接看官网就行了。</p><h2 id="linux">Linux</h2><p>参考这篇</p><p>https://www.jianshu.com/p/c43ebab25484</p><p>下载压缩包-&gt;解压-&gt;配置路径</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">`sudo apt-get install vim`安装vim</span><br>vim /etc/profile<br><span class="hljs-meta prompt_"># </span><span class="language-bash">在最后一行添加</span><br>export GOROOT=/usr/local/go<br>export PATH=$PATH:$GOROOT/bin<br><span class="hljs-meta prompt_"># </span><span class="language-bash">保存退出后<span class="hljs-built_in">source</span>一下</span><br>source /etc/profile<br></code></pre></td></tr></table></figure><h2 id="mac">Mac</h2><p>没有用过，略</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Go</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【计算机网络】HTTP状态码</title>
+    <link href="/2023/03/01/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91HTTP%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+    <url>/2023/03/01/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91HTTP%E7%8A%B6%E6%80%81%E7%A0%81/</url>
+    
+    <content type="html"><![CDATA[<h1 id="http-中的状态码">HTTP 中的状态码</h1><h2 id="状态码的作用">状态码的作用</h2><p>状态码的职责是当客户端向服务器发送请求时，描述返回的请求结果，借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。</p><p>状态码第一位数字决定了不同的响应状态，有如下：</p><ul><li>1 表示消息</li><li>2 表示成功</li><li>3 表示重定向</li><li>4 表示请求错误</li><li>5 表示服务器错误</li></ul><h2 id="xx">1xx</h2><p>代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束</p><p>常见的有：</p><ul><li><p>100（客户端继续发送请求，这是临时响应）：这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应</p></li><li><p>101：服务器根据客户端的请求切换协议，主要用于 websocket 或 http2 升级</p></li></ul><h2 id="xx-1">2xx</h2><p>代表请求已成功被服务器接收、理解、并接受</p><p>常见的有：</p><ul><li><p>200（成功）：请求已成功，请求所希望的响应头或数据体将随此响应返回</p></li><li><p>201（已创建）：请求成功并且服务器创建了新的资源</p></li><li><p>202（已创建）：服务器已经接收请求，但尚未处理</p></li><li><p>203（非授权信息）：服务器已成功处理请求，但返回的信息可能来自另一来源</p></li><li><p>204（无内容）：服务器成功处理请求，但没有返回任何内容</p></li><li><p>205（重置内容）：服务器成功处理请求，但没有返回任何内容</p></li><li><p>206（部分内容）：服务器成功处理了部分请求</p></li></ul><h3 id="xx-2">3xx</h3><p>表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向</p><p>常见的有：</p><ul><li><p>300（多种选择）：针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择</p></li><li><p>301（永久移动）：请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置</p></li><li><p>302（临时移动）： 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求</p></li><li><p>303（查看其他位置）：请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码</p></li><li><p>305 （使用代理）： 请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理</p></li><li><p>307 （临时重定向）： 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求</p></li></ul><h3 id="xx-3">4xx</h3><p>代表了客户端看起来可能发生了错误，妨碍了服务器的处理</p><p>常见的有：</p><ul><li><p>400（错误请求）： 服务器不理解请求的语法</p></li><li><p>401（未授权）： 请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。</p></li><li><p>403（禁止）： 服务器拒绝请求</p></li><li><p>404（未找到）： 服务器找不到请求的网页</p></li><li><p>405（方法禁用）： 禁用请求中指定的方法</p></li><li><p>406（不接受）： 无法使用请求的内容特性响应请求的网页</p></li><li><p>407（需要代理授权）： 此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理</p></li><li><p>408（请求超时）： 服务器等候请求时发生超时</p></li></ul><h3 id="xx-4">5xx</h3><p>表示服务器无法完成明显有效的请求。这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生</p><p>常见的有：</p><ul><li><p>500（服务器内部错误）：服务器遇到错误，无法完成请求</p></li><li><p>501（尚未实施）：服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码</p></li><li><p><strong>502（错误网关）</strong>： 服务器作为网关或代理，从上游服务器收到无效响应</p></li><li><p>503（服务不可用）： 服务器目前无法使用（由于超载或停机维护）</p></li><li><p><strong>504（网关超时）</strong>： 服务器作为网关或代理，但是没有及时从上游服务器收到请求</p></li><li><p>505（HTTP 版本不受支持）： 服务器不支持请求中所用的 HTTP 协议版本</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计算机网络</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【Go基础】new与make</title>
     <link href="/2023/02/28/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91new%E4%B8%8Emake/"/>
     <url>/2023/02/28/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91new%E4%B8%8Emake/</url>
@@ -131,6 +206,31 @@
   
   
   <entry>
+    <title>windows平台上的ffmpeg安装</title>
+    <link href="/2020/11/15/windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84ffmpeg%E5%AE%89%E8%A3%85/"/>
+    <url>/2020/11/15/windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84ffmpeg%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<h1 id="windows平台上的ffmpeg安装">windows平台上的ffmpeg安装</h1><p>目的是想得到ffmpeg.exe方便直接调用。</p><p>https://ffmpeg.org/download.html#releases</p><p>这个是官网，不过官方提供了源代码。一开始来没找到编译后的文件。</p><p>仔细一看，官方还是给了他人编译的链接。</p><p>https://github.com/BtbN/FFmpeg-Builds/releases</p><p>https://www.gyan.dev/ffmpeg/builds/</p><p>windows平台的就两个。不过更新的都挺快的感觉。</p><figure><img src="https://img-blog.csdnimg.cn/20201115001610449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>我下载的这个，其他版本倒也不是太懂其中的区别。</p><p>解压得到下面这些东西</p><figure><img src="https://img-blog.csdnimg.cn/20201115001717159.png#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>我想要的ffmpeg.exe就在bin文件夹里面</p><figure><img src="https://img-blog.csdnimg.cn/2020111500185792.png#pic_center" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>这里吐槽一下。本来想直接用一些软件里面自带的ffmpeg.exe的，但估计是定制化的修改过的。转化的时候会降低画质。</p><p>还有就是通过 python pip 安装的ffmpeg是没有exe文件的。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ffmpeg</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>深度学习Q&amp;A</title>
     <link href="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Q&amp;A/"/>
     <url>/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Q&amp;A/</url>
@@ -173,6 +273,31 @@
     <tags>
       
       <tag>深度学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>windows安装pymouse</title>
+    <link href="/2020/04/13/windows%E5%AE%89%E8%A3%85pymouse/"/>
+    <url>/2020/04/13/windows%E5%AE%89%E8%A3%85pymouse/</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装pymouse">安装pymouse</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pymouse<br></code></pre></td></tr></table></figure><p>遇到报错</p><h2 id="modulenotfounderror-no-module-named-windows">ModuleNotFoundError: No module named 'windows'</h2><p>此时需要下载一个叫 PyUserinput的包</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install PyUserinput<br></code></pre></td></tr></table></figure><p>但是遭遇</p><h2 id="could-not-find-a-version-that-satisfies-the-requirement-pyhook-from-pyuserinput-from-versions-no-matching-distribution-found-for-pyhook-from-pyuserinput">Could not find a version that satisfies the requirement pyHook (from PyUserinput) (from versions: )No matching distribution found for pyHook (from PyUserinput)</h2><figure><img src="https://img-blog.csdnimg.cn/20200413172042294.png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>需要下载个pyHook ，不过明显不能通过pip直接下载了</p><p>https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook</p><p>去这个网址里面找到pyHook，下载符合自己python版本的whl文件在电脑上</p><figure><img src="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>然后cmd里面切换到该whl文件所在地方。</p><p>输入</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyHook-<span class="hljs-number">1.5</span><span class="hljs-number">.1</span>-cp36-cp36m-win_amd64.whl<br>(因为我的python是<span class="hljs-number">3.6</span>版本的)<br></code></pre></td></tr></table></figure><figure><img src="https://img-blog.csdnimg.cn/20200413172459656.png" alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption></figure><p>就下载好了</p><p>这时再下载好PyUserinput就万事OK了</p><p>pymouse也就可以用了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>pymouse</tag>
       
     </tags>
     

@@ -16,37 +16,24 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+    <meta name="description" content="HTTP 中的状态码 状态码的作用 状态码的职责是当客户端向服务器发送请求时，描述返回的请求结果，借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。 状态码第一位数字决定了不同的响应状态，有如下：  1 表示消息 2 表示成功 3 表示重定向 4 表示请求错误 5 表示服务器错误  1xx 代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装cuda 11  ,cudnn，pytorch 1.7">
-<meta property="og:url" content="https://zyweven.github.io/2020/11/23/%E5%AE%89%E8%A3%85cuda%2011%20%20,cudnn%EF%BC%8Cpytorch%201.7/index.html">
+<meta property="og:title" content="【计算机网络】HTTP状态码">
+<meta property="og:url" content="https://zyweven.github.io/2023/03/01/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91HTTP%E7%8A%B6%E6%80%81%E7%A0%81/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+<meta property="og:description" content="HTTP 中的状态码 状态码的作用 状态码的职责是当客户端向服务器发送请求时，描述返回的请求结果，借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。 状态码第一位数字决定了不同的响应状态，有如下：  1 表示消息 2 表示成功 3 表示重定向 4 表示请求错误 5 表示服务器错误  1xx 代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center">
-<meta property="article:published_time" content="2020-11-23T10:13:18.000Z">
-<meta property="article:modified_time" content="2023-02-28T13:43:24.913Z">
+<meta property="article:published_time" content="2023-03-01T02:43:00.000Z">
+<meta property="article:modified_time" content="2023-03-01T02:47:43.584Z">
 <meta property="article:author" content="even zhang">
-<meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>安装cuda 11  ,cudnn，pytorch 1.7 - Even</title>
+  <title>【计算机网络】HTTP状态码 - Even</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">安装cuda 11  ,cudnn，pytorch 1.7</span>
+            <span id="subtitle">【计算机网络】HTTP状态码</span>
           
         </div>
 
@@ -223,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-11-23 18:13" pubdate>
-          2020年11月23日 晚上
+        <time datetime="2023-03-01 10:43" pubdate>
+          2023年3月1日 上午
         </time>
       </span>
     
@@ -235,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.4k 字
         
       </span>
     
@@ -246,7 +233,7 @@
         
         
         
-          10 分钟
+          13 分钟
         
       </span>
     
@@ -292,87 +279,76 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">安装cuda 11  ,cudnn，pytorch 1.7</h1>
+            <h1 style="display: none">【计算机网络】HTTP状态码</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="安装-cuda">1. 安装 cuda</h2>
-<p>先康康电脑里面有没有</p>
-<p>nvcc -V</p>
-<p>结果当然是没有。</p>
-<p>要安装首选需要康康自己的显卡能支持到多少的 cuda</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>打开这个（可以通过搜索直接搜到。）</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>点击系统信息</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。</p>
-<p>想用新一点的，所以打算就直接安装 cuda11</p>
-<p>https://developer.nvidia.com/cuda-toolkit</p>
-<p>去官网下载</p>
-<p>进去发现直接就是11update。</p>
-<p>找了一下才找到以前的版本下载的位置。</p>
-<p><img src="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /></p>
-<p>这个就是我想要的版本</p>
-<p>挺大的，还好我的网速还不错。</p>
-<p>下载完毕直接安装就可以了。我下载在C盘里面。</p>
-<h2 id="cudnn下载">2.cudnn下载</h2>
-<p>https://developer.nvidia.com/rdp/cudnn-download</p>
-<p>去这里下载</p>
-<p>需要登录</p>
-<p>可以直接微信登录就完事了，比较方便。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>很明确的，就是下载这个</p>
-<p>下载好是个压缩包，解压后有这些东西</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>然后进入 C:FilesGPU Computing Toolkit.0</p>
-<p>将 bin include lib 都复制到这里面</p>
-<h3 id="验证是否安装成功-cuda-cudnn">验证是否安装成功 cuda cudnn</h3>
-<p>打开cmd</p>
-<p>cd C:FilesGPU Computing Toolkit.0_suite</p>
-<p>运行 bandwidthTest.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>运行 deviceQuery.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>有PASS就是OK的。</p>
-<h2 id="安装pytorch-1.7">安装pytorch 1.7</h2>
-<p>https://pytorch.org/</p>
-<p>直接去官网</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>选好后下载好就行了。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>参考： https://blog.csdn.net/qq_18620653/article/details/105329219</p>
-<hr />
-<p>时间 2021年5月15日</p>
-<p>网络不好 只能采取wheel的方式下载</p>
-<p>https://pytorch.org/get-started/previous-versions/</p>
-<p>https://download.pytorch.org/whl/torch_stable.html</p>
-<p>去上面的第二个网址通过浏览器下载需要的wheel会比用pip下载稳定点，至于要下载哪个就只有参考第一个网址，或者通过pip返回出来的那个名字找就行。 下载好之后，通过</p>
-<pre><code class="hljs">pip install torch-1.8.0+cu111-cp38-cp38-win_amd64.whl</code></pre>
-<p>安装就行了</p>
-<p>我这次下载的是1.8版本的</p>
-<p>链接：https://pan.baidu.com/s/1XBH5Zn5uPteURANU23taKA 提取码：mn3g</p>
-<p>就顺带上传到网盘里了。</p>
-<p>不过配套的 torchvision==0.9.0+cu111 torchaudio==0.8.0 就自己通过pip单独下载了。</p>
+                <h1 id="http-中的状态码">HTTP 中的状态码</h1>
+<h2 id="状态码的作用">状态码的作用</h2>
+<p>状态码的职责是当客户端向服务器发送请求时，描述返回的请求结果，借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。</p>
+<p>状态码第一位数字决定了不同的响应状态，有如下：</p>
+<ul>
+<li>1 表示消息</li>
+<li>2 表示成功</li>
+<li>3 表示重定向</li>
+<li>4 表示请求错误</li>
+<li>5 表示服务器错误</li>
+</ul>
+<h2 id="xx">1xx</h2>
+<p>代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束</p>
+<p>常见的有：</p>
+<ul>
+<li><p>100（客户端继续发送请求，这是临时响应）：这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应</p></li>
+<li><p>101：服务器根据客户端的请求切换协议，主要用于 websocket 或 http2 升级</p></li>
+</ul>
+<h2 id="xx-1">2xx</h2>
+<p>代表请求已成功被服务器接收、理解、并接受</p>
+<p>常见的有：</p>
+<ul>
+<li><p>200（成功）：请求已成功，请求所希望的响应头或数据体将随此响应返回</p></li>
+<li><p>201（已创建）：请求成功并且服务器创建了新的资源</p></li>
+<li><p>202（已创建）：服务器已经接收请求，但尚未处理</p></li>
+<li><p>203（非授权信息）：服务器已成功处理请求，但返回的信息可能来自另一来源</p></li>
+<li><p>204（无内容）：服务器成功处理请求，但没有返回任何内容</p></li>
+<li><p>205（重置内容）：服务器成功处理请求，但没有返回任何内容</p></li>
+<li><p>206（部分内容）：服务器成功处理了部分请求</p></li>
+</ul>
+<h3 id="xx-2">3xx</h3>
+<p>表示要完成请求，需要进一步操作。 通常，这些状态代码用来重定向</p>
+<p>常见的有：</p>
+<ul>
+<li><p>300（多种选择）：针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择</p></li>
+<li><p>301（永久移动）：请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置</p></li>
+<li><p>302（临时移动）： 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求</p></li>
+<li><p>303（查看其他位置）：请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码</p></li>
+<li><p>305 （使用代理）： 请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理</p></li>
+<li><p>307 （临时重定向）： 服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求</p></li>
+</ul>
+<h3 id="xx-3">4xx</h3>
+<p>代表了客户端看起来可能发生了错误，妨碍了服务器的处理</p>
+<p>常见的有：</p>
+<ul>
+<li><p>400（错误请求）： 服务器不理解请求的语法</p></li>
+<li><p>401（未授权）： 请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。</p></li>
+<li><p>403（禁止）： 服务器拒绝请求</p></li>
+<li><p>404（未找到）： 服务器找不到请求的网页</p></li>
+<li><p>405（方法禁用）： 禁用请求中指定的方法</p></li>
+<li><p>406（不接受）： 无法使用请求的内容特性响应请求的网页</p></li>
+<li><p>407（需要代理授权）： 此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理</p></li>
+<li><p>408（请求超时）： 服务器等候请求时发生超时</p></li>
+</ul>
+<h3 id="xx-4">5xx</h3>
+<p>表示服务器无法完成明显有效的请求。这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生</p>
+<p>常见的有：</p>
+<ul>
+<li><p>500（服务器内部错误）：服务器遇到错误，无法完成请求</p></li>
+<li><p>501（尚未实施）：服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码</p></li>
+<li><p><strong>502（错误网关）</strong>： 服务器作为网关或代理，从上游服务器收到无效响应</p></li>
+<li><p>503（服务不可用）： 服务器目前无法使用（由于超载或停机维护）</p></li>
+<li><p><strong>504（网关超时）</strong>： 服务器作为网关或代理，但是没有及时从上游服务器收到请求</p></li>
+<li><p>505（HTTP 版本不受支持）： 服务器不支持请求中所用的 HTTP 协议版本</p></li>
+</ul>
 
                 
               </div>
@@ -391,7 +367,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
   
   
 
@@ -406,9 +382,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
-      
-        <a href="/tags/pytorch/">#pytorch</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
       
     </div>
   
@@ -420,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>安装cuda 11  ,cudnn，pytorch 1.7</div>
-      <div>https://zyweven.github.io/2020/11/23/安装cuda 11  ,cudnn，pytorch 1.7/</div>
+      <div>【计算机网络】HTTP状态码</div>
+      <div>https://zyweven.github.io/2023/03/01/【计算机网络】HTTP状态码/</div>
     </div>
     <div class="license-meta">
       
@@ -433,7 +407,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年11月23日</div>
+          <div>2023年3月1日</div>
         </div>
       
       
@@ -465,9 +439,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/30/Ubuntu%20%E8%87%AA%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%AF%94%E5%A6%82frp%EF%BC%89/" title="Ubuntu 自启动程序（比如frp）">
+                      <a href="/2023/03/01/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91Go%E5%AE%89%E8%A3%85/" title="【Go基础】Go安装">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu 自启动程序（比如frp）</span>
+                        <span class="hidden-mobile">【Go基础】Go安装</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -475,8 +449,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/15/windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84ffmpeg%E5%AE%89%E8%A3%85/" title="windows平台上的ffmpeg安装">
-                        <span class="hidden-mobile">windows平台上的ffmpeg安装</span>
+                      <a href="/2023/02/28/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91new%E4%B8%8Emake/" title="【Go基础】new与make">
+                        <span class="hidden-mobile">【Go基础】new与make</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

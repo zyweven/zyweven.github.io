@@ -16,37 +16,24 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+    <meta name="description" content="普通循环写法 1234567891011func main() &amp;#123;     for i :&#x3D; 21; i &lt; 120; i++ &amp;#123;        address :&#x3D; fmt.Sprintf(&quot;121.4.131.64:%d&quot;, i)        conn, err :&#x3D; net.Dial(&quot;tcp&quot;, address)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装cuda 11  ,cudnn，pytorch 1.7">
-<meta property="og:url" content="https://zyweven.github.io/2020/11/23/%E5%AE%89%E8%A3%85cuda%2011%20%20,cudnn%EF%BC%8Cpytorch%201.7/index.html">
+<meta property="og:title" content="【Go练习】TCP 端口扫描器">
+<meta property="og:url" content="https://zyweven.github.io/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="1. 安装 cuda 先康康电脑里面有没有 nvcc -V 结果当然是没有。 要安装首选需要康康自己的显卡能支持到多少的 cuda  在这里插入图片描述  打开这个（可以通过搜索直接搜到。）  在这里插入图片描述  点击系统信息  在这里插入图片描述  在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。 想用新一点的，所以打算就直接安装 cud">
+<meta property="og:description" content="普通循环写法 1234567891011func main() &amp;#123;     for i :&#x3D; 21; i &lt; 120; i++ &amp;#123;        address :&#x3D; fmt.Sprintf(&quot;121.4.131.64:%d&quot;, i)        conn, err :&#x3D; net.Dial(&quot;tcp&quot;, address)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center">
-<meta property="article:published_time" content="2020-11-23T10:13:18.000Z">
-<meta property="article:modified_time" content="2023-02-28T13:43:24.913Z">
+<meta property="article:published_time" content="2023-03-02T13:52:00.000Z">
+<meta property="article:modified_time" content="2023-03-02T14:08:35.374Z">
 <meta property="article:author" content="even zhang">
-<meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="Go练习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>安装cuda 11  ,cudnn，pytorch 1.7 - Even</title>
+  <title>【Go练习】TCP 端口扫描器 - Even</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">安装cuda 11  ,cudnn，pytorch 1.7</span>
+            <span id="subtitle">【Go练习】TCP 端口扫描器</span>
           
         </div>
 
@@ -223,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-11-23 18:13" pubdate>
-          2020年11月23日 晚上
+        <time datetime="2023-03-02 21:52" pubdate>
+          2023年3月2日 晚上
         </time>
       </span>
     
@@ -235,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.3k 字
         
       </span>
     
@@ -246,7 +233,7 @@
         
         
         
-          10 分钟
+          19 分钟
         
       </span>
     
@@ -292,87 +279,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">安装cuda 11  ,cudnn，pytorch 1.7</h1>
+            <h1 style="display: none">【Go练习】TCP 端口扫描器</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="安装-cuda">1. 安装 cuda</h2>
-<p>先康康电脑里面有没有</p>
-<p>nvcc -V</p>
-<p>结果当然是没有。</p>
-<p>要安装首选需要康康自己的显卡能支持到多少的 cuda</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123175747734.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>打开这个（可以通过搜索直接搜到。）</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2020112317585665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>点击系统信息</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123175932212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>在组件栏可以发现我的电脑支持 11.0.228 以下的 driver。</p>
-<p>想用新一点的，所以打算就直接安装 cuda11</p>
-<p>https://developer.nvidia.com/cuda-toolkit</p>
-<p>去官网下载</p>
-<p>进去发现直接就是11update。</p>
-<p>找了一下才找到以前的版本下载的位置。</p>
-<p><img src="https://img-blog.csdnimg.cn/20201123180323419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /> <img src="https://img-blog.csdnimg.cn/20201123180348700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /></p>
-<p>这个就是我想要的版本</p>
-<p>挺大的，还好我的网速还不错。</p>
-<p>下载完毕直接安装就可以了。我下载在C盘里面。</p>
-<h2 id="cudnn下载">2.cudnn下载</h2>
-<p>https://developer.nvidia.com/rdp/cudnn-download</p>
-<p>去这里下载</p>
-<p>需要登录</p>
-<p>可以直接微信登录就完事了，比较方便。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180559552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>很明确的，就是下载这个</p>
-<p>下载好是个压缩包，解压后有这些东西</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123180726401.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>然后进入 C:FilesGPU Computing Toolkit.0</p>
-<p>将 bin include lib 都复制到这里面</p>
-<h3 id="验证是否安装成功-cuda-cudnn">验证是否安装成功 cuda cudnn</h3>
-<p>打开cmd</p>
-<p>cd C:FilesGPU Computing Toolkit.0_suite</p>
-<p>运行 bandwidthTest.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/2020112318101117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>运行 deviceQuery.exe</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181043320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>有PASS就是OK的。</p>
-<h2 id="安装pytorch-1.7">安装pytorch 1.7</h2>
-<p>https://pytorch.org/</p>
-<p>直接去官网</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123181151663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>选好后下载好就行了。</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20201123182808356.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
-<p>参考： https://blog.csdn.net/qq_18620653/article/details/105329219</p>
-<hr />
-<p>时间 2021年5月15日</p>
-<p>网络不好 只能采取wheel的方式下载</p>
-<p>https://pytorch.org/get-started/previous-versions/</p>
-<p>https://download.pytorch.org/whl/torch_stable.html</p>
-<p>去上面的第二个网址通过浏览器下载需要的wheel会比用pip下载稳定点，至于要下载哪个就只有参考第一个网址，或者通过pip返回出来的那个名字找就行。 下载好之后，通过</p>
-<pre><code class="hljs">pip install torch-1.8.0+cu111-cp38-cp38-win_amd64.whl</code></pre>
-<p>安装就行了</p>
-<p>我这次下载的是1.8版本的</p>
-<p>链接：https://pan.baidu.com/s/1XBH5Zn5uPteURANU23taKA 提取码：mn3g</p>
-<p>就顺带上传到网盘里了。</p>
-<p>不过配套的 torchvision==0.9.0+cu111 torchaudio==0.8.0 就自己通过pip单独下载了。</p>
+                <h2 id="普通循环写法">普通循环写法</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.4.131.64:%d&quot;</span>, i)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>      &#125;  <br>      conn.Close()  <br>      fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>   &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="并发写法">并发写法</h2>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;  <br>         <span class="hljs-keyword">defer</span> wg.Done()  <br>         address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, i)  <br>         conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>         <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>            fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>            <span class="hljs-keyword">return</span>  <br>         &#125;  <br>         conn.Close()  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>         <span class="hljs-comment">//wg.Done()  </span><br>      &#125;(i)  <br>   &#125;  <br>   wg.Wait()  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;\n\n 用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="worker池写法">worker池写法</h2>
+<p>多线程写法，同时对端口号进行了排序，使用两个通道来分别接收关闭的端口和开启的端口。</p>
+<p>[[image-20230302220833331.png]]</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">workerpool</span><span class="hljs-params">(ports <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, cresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, oresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, wg *sync.WaitGroup)</span></span> &#123;  <br>   <span class="hljs-keyword">defer</span> wg.Done()  <br>   <span class="hljs-keyword">for</span> port := <span class="hljs-keyword">range</span> ports &#123;  <br>      <span class="hljs-comment">//fmt.Println(port)  </span><br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, port)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         cresult &lt;- port  <br>         <span class="hljs-keyword">continue</span> <span class="hljs-comment">// 注意这个 避免conn为nil时还去关闭它</span><br>         <span class="hljs-comment">//fmt.Printf(&quot;%s 关闭了\n&quot;, address)  </span><br>      &#125; <span class="hljs-keyword">else</span> &#123;  <br>         oresult &lt;- port  <br>      &#125;  <br>      conn.Close()  <br>   &#125;  <br>&#125;  <br>  <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   nworker := <span class="hljs-number">20</span>  <br>   startPort := <span class="hljs-number">1</span>  <br>   endPort := <span class="hljs-number">1000</span>  <br>   cresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   oresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   ports := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">25</span>)  <br>   openports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>   closeports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> cresults &#123;  <br>	    closeports = <span class="hljs-built_in">append</span>(closeports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> oresults &#123;  <br>	    openports = <span class="hljs-built_in">append</span>(openports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; nworker; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> workerpool(ports, cresults, oresults, &amp;wg)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> i := startPort; i &lt; endPort; i++ &#123;  <br>      ports &lt;- i  <br>   &#125;  <br>   <span class="hljs-built_in">close</span>(ports)  <span class="hljs-comment">//把数据全部输入到ports之后关闭通道。</span><br>   wg.Wait()  <span class="hljs-comment">// 等待所有的 worker 完成任务</span><br>   <span class="hljs-built_in">close</span>(oresults)   <span class="hljs-comment">//这两个通道应该是在worker工作完之后才关闭</span><br>   <span class="hljs-built_in">close</span>(cresults)  <br>   sort.Ints(closeports)  <br>   sort.Ints(openports)  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> openports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 开\n&quot;</span>, i)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> closeports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 关\n&quot;</span>, i)  <br>   &#125;  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;一共用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -391,7 +310,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/Go/" class="category-chain-item">Go</a>
   
   
 
@@ -406,9 +325,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
-      
-        <a href="/tags/pytorch/">#pytorch</a>
+        <a href="/tags/Go%E7%BB%83%E4%B9%A0/">#Go练习</a>
       
     </div>
   
@@ -420,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>安装cuda 11  ,cudnn，pytorch 1.7</div>
-      <div>https://zyweven.github.io/2020/11/23/安装cuda 11  ,cudnn，pytorch 1.7/</div>
+      <div>【Go练习】TCP 端口扫描器</div>
+      <div>https://zyweven.github.io/2023/03/02/【Go练习】TCP 端口扫描器/</div>
     </div>
     <div class="license-meta">
       
@@ -433,7 +350,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年11月23日</div>
+          <div>2023年3月2日</div>
         </div>
       
       
@@ -465,18 +382,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/30/Ubuntu%20%E8%87%AA%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%AF%94%E5%A6%82frp%EF%BC%89/" title="Ubuntu 自启动程序（比如frp）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ubuntu 自启动程序（比如frp）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/15/windows%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84ffmpeg%E5%AE%89%E8%A3%85/" title="windows平台上的ffmpeg安装">
-                        <span class="hidden-mobile">windows平台上的ffmpeg安装</span>
+                      <a href="/2023/03/01/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91Go%E5%AE%89%E8%A3%85/" title="【Go基础】Go安装">
+                        <span class="hidden-mobile">【Go基础】Go安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

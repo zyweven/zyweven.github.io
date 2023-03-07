@@ -16,26 +16,24 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="普通循环写法 1234567891011func main() &amp;#123;     for i :&#x3D; 21; i &lt; 120; i++ &amp;#123;        address :&#x3D; fmt.Sprintf(&quot;121.4.131.64:%d&quot;, i)        conn, err :&#x3D; net.Dial(&quot;tcp&quot;, address)">
+    <meta name="description" content="Go 的包管理经历了三个演变过程： GOPATH -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Go练习】TCP 端口扫描器">
-<meta property="og:url" content="https://zyweven.github.io/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/index.html">
+<meta property="og:title" content="【Go基础】包管理">
+<meta property="og:url" content="https://zyweven.github.io/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%861%E2%80%94%E2%80%94GOPATH%20and%20Vendor/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="普通循环写法 1234567891011func main() &amp;#123;     for i :&#x3D; 21; i &lt; 120; i++ &amp;#123;        address :&#x3D; fmt.Sprintf(&quot;121.4.131.64:%d&quot;, i)        conn, err :&#x3D; net.Dial(&quot;tcp&quot;, address)">
+<meta property="og:description" content="Go 的包管理经历了三个演变过程： GOPATH -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zyweven.github.io/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/image-20230305144556578.png">
-<meta property="article:published_time" content="2023-03-02T13:52:00.000Z">
-<meta property="article:modified_time" content="2023-03-05T06:45:58.276Z">
+<meta property="article:published_time" content="2023-03-05T02:06:00.000Z">
+<meta property="article:modified_time" content="2023-03-05T02:30:25.090Z">
 <meta property="article:author" content="even zhang">
-<meta property="article:tag" content="Go练习">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://zyweven.github.io/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/image-20230305144556578.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>【Go练习】TCP 端口扫描器 - Even</title>
+  <title>【Go基础】包管理 - Even</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">【Go练习】TCP 端口扫描器</span>
+            <span id="subtitle">【Go基础】包管理</span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-02 21:52" pubdate>
-          2023年3月2日 晚上
+        <time datetime="2023-03-05 10:06" pubdate>
+          2023年3月5日 上午
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          1.8k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          19 分钟
+          15 分钟
         
       </span>
     
@@ -281,19 +279,38 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【Go练习】TCP 端口扫描器</h1>
+            <h1 style="display: none">【Go基础】包管理</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="普通循环写法">普通循环写法</h2>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.4.131.64:%d&quot;</span>, i)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>      &#125;  <br>      conn.Close()  <br>      fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>   &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="并发写法">并发写法</h2>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">21</span>; i &lt; <span class="hljs-number">120</span>; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;  <br>         <span class="hljs-keyword">defer</span> wg.Done()  <br>         address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, i)  <br>         conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>         <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>            fmt.Printf(<span class="hljs-string">&quot;%s 关闭\n&quot;</span>, address)  <br>            <span class="hljs-keyword">return</span>  <br>         &#125;  <br>         conn.Close()  <br>         fmt.Printf(<span class="hljs-string">&quot;%s 打开\n&quot;</span>, address)  <br>         <span class="hljs-comment">//wg.Done()  </span><br>      &#125;(i)  <br>   &#125;  <br>   wg.Wait()  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;\n\n 用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="worker池写法">worker池写法</h2>
-<p>多线程写法，同时对端口号进行了排序，使用两个通道来分别接收关闭的端口和开启的端口。</p>
-<img src="/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/image-20230305144556578.png" srcset="/img/loading.gif" lazyload class="">
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">workerpool</span><span class="hljs-params">(ports <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, cresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, oresult <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, wg *sync.WaitGroup)</span></span> &#123;  <br>   <span class="hljs-keyword">defer</span> wg.Done()  <br>   <span class="hljs-keyword">for</span> port := <span class="hljs-keyword">range</span> ports &#123;  <br>      <span class="hljs-comment">//fmt.Println(port)  </span><br>      address := fmt.Sprintf(<span class="hljs-string">&quot;121.2.131.64:%d&quot;</span>, port)  <br>      conn, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, address)  <br>      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>         cresult &lt;- port  <br>         <span class="hljs-keyword">continue</span> <span class="hljs-comment">// 注意这个 避免conn为nil时还去关闭它</span><br>         <span class="hljs-comment">//fmt.Printf(&quot;%s 关闭了\n&quot;, address)  </span><br>      &#125; <span class="hljs-keyword">else</span> &#123;  <br>         oresult &lt;- port  <br>      &#125;  <br>      conn.Close()  <br>   &#125;  <br>&#125;  <br>  <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>   start := time.Now()  <br>   <span class="hljs-keyword">var</span> wg sync.WaitGroup  <br>   nworker := <span class="hljs-number">20</span>  <br>   startPort := <span class="hljs-number">1</span>  <br>   endPort := <span class="hljs-number">1000</span>  <br>   cresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   oresults := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)  <br>   ports := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">25</span>)  <br>   openports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>   closeports := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>)  <br>  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> cresults &#123;  <br>	    closeports = <span class="hljs-built_in">append</span>(closeports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;  <br>      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> oresults &#123;  <br>	    openports = <span class="hljs-built_in">append</span>(openports, i)  <br>      &#125;  <br>   &#125;()  <br>   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; nworker; i++ &#123;  <br>      wg.Add(<span class="hljs-number">1</span>)  <br>      <span class="hljs-keyword">go</span> workerpool(ports, cresults, oresults, &amp;wg)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> i := startPort; i &lt; endPort; i++ &#123;  <br>      ports &lt;- i  <br>   &#125;  <br>   <span class="hljs-built_in">close</span>(ports)  <span class="hljs-comment">//把数据全部输入到ports之后关闭通道。</span><br>   wg.Wait()  <span class="hljs-comment">// 等待所有的 worker 完成任务</span><br>   <span class="hljs-built_in">close</span>(oresults)   <span class="hljs-comment">//这两个通道应该是在worker工作完之后才关闭</span><br>   <span class="hljs-built_in">close</span>(cresults)  <br>   sort.Ints(closeports)  <br>   sort.Ints(openports)  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> openports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 开\n&quot;</span>, i)  <br>   &#125;  <br>   <span class="hljs-keyword">for</span> _, i := <span class="hljs-keyword">range</span> closeports &#123;  <br>      fmt.Printf(<span class="hljs-string">&quot;121.2.131.64:%d 关\n&quot;</span>, i)  <br>   &#125;  <br>   elapsed := time.Since(start) / <span class="hljs-number">1e9</span>  <br>   fmt.Printf(<span class="hljs-string">&quot;一共用时 %d&quot;</span>, elapsed)  <br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>Go 的包管理经历了三个演变过程：</p>
+<p><strong>GOPATH</strong> -&gt; <strong>Vendor</strong> -&gt; <strong>GO Module</strong></p>
+<p>目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。</p>
+<h2 id="gopath">GOPATH</h2>
+<p>Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。</p>
+<h3 id="gopath-的使用">GOPATH 的使用</h3>
+<p>如果当前的 GOPATH 为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export GOPATH=/usr/local/goprojects:/home/tonybai/go<br></code></pre></td></tr></table></figure>
+<p>那么 Go 编译器在编译 Go 程序时，就会在下面两个路径下搜索第三方依赖包是否存在： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/local/goprojects/src/github.com/user/repo<br>/home/tonybai/go/src/github.com/user/repo<br></code></pre></td></tr></table></figure></p>
+<p>如果没有找到的话，就需要程序员使用 go get 来将本地缺失的第三方依赖包下载到本地如： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/sirupsen/logrus<br></code></pre></td></tr></table></figure></p>
+<p>这里的 go get 命令，不仅能将 logrus 包下载到 GOPATH 环境变量配置的目录下，它还会检查 logrus 的依赖包在本地是否存在，如果不存在，go get 也会一并将它们下载到本地。 但是，go get 下载的包只是那个时刻各个依赖包的最新主线版本。而依赖包是会持续演进的，这就不能保证程序的可重现的构建（Reproduceable Build）。</p>
+<h3 id="gopath-的问题">GOPATH 的问题</h3>
+<p>在 GOPATH 构建模式下，==Go 编译器实质上并没有关注 Go 项目所依赖的第三方包的版本。==</p>
+<p>但 Go 开发者希望自己的 Go 项目所依赖的第三方包版本能受到自己的控制，而不是随意变化。于是 Go 核心开发团队引入了 Vendor 机制试图解决上面的问题。</p>
+<h2 id="vendor">Vendor</h2>
+<p>Go 在 1.5 版本中引入 vendor 机制。vendor 机制本质上就是在 Go 项目的某个特定目录下，将项目的所有依赖包缓存起来，这个特定目录名就是 vendor。</p>
+<p>Go 编译器会优先感知和使用 <strong>vendor 目录</strong>下缓存的第三方包版本，而不是 GOPATH 环境变量所配置的路径下的第三方包版本。这样，无论第三方依赖包自己如何变化，无论 GOPATH 环境变量所配置的路径下的第三方包是否存在、版本是什么，都不会影响到 Go 程序的构建。</p>
+<p>只要将 vendor 目录和项目源码一样提交到代码仓库，那么其他开发者下载这个项目，都可以实现可重现的构建。因此，如果使用 vendor 机制管理第三方依赖包，最佳实践就是将 vendor 一并提交到代码仓库中。</p>
+<p>要想开启 vendor 机制，<strong>Go 项目必须位于 GOPATH 环境变量配置的某个路径的 src 目录下面</strong>。如果不满足这一路径要求，那么 Go 编译器是不会理会 Go 项目目录下的 vendor 目录。</p>
+<h3 id="vendor-的问题">vendor 的问题</h3>
+<p>一方面，Go 项目必须放在 GOPATH 环境变量配置的路径下，庞大的 vendor 目录需要提交到代码仓库，不仅占用代码仓库空间，减慢仓库下载和更新的速度，而且还会干扰代码评审，对实施代码统计等开发者效能工具也有比较大影响。（感觉就像是把 vue 项目里面的 module 给一起上传到 GitHub 一样）</p>
+<p>另一方面，还需要手工管理 vendor 下面的 Go 依赖包，包括项目依赖包的分析、版本的记录、依赖包获取和存放，等等。</p>
+<p>Go Module 构建模式下，可以无需手动维护 vendor 目录下的依赖包了，Go 提供了可以快速建立和更新 vendor 的命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">go mod vendor  //使用该指令<br><br>tree -LF 2 vendor<br>vendor<br>├── github.com/<br>│   ├── google/<br>│   ├── magefile/<br>│   └── sirupsen/<br>├── golang.org/<br>│   └── x/<br>└── modules.txt<br></code></pre></td></tr></table></figure>
+<p>go mod vendor 命令在 vendor 目录下，创建了一份这个项目的依赖包的副本，并且通过 vendor/modules. txt 记录了 vendor 下的 module 以及版本。</p>
+<p>如果我们要基于 vendor 构建，而不是基于本地缓存的 Go Module 构建，我们需要在 go build 后面加上 -mod=vendor 参数。</p>
+<p>在 Go 1.14 及以后版本中，如果 Go 项目的顶层目录下存在 vendor 目录，那么 go build 默认也会优先基于 vendor 构建，除非给 go build 传入 -mod=mod 的参数。</p>
 
                 
               </div>
@@ -327,7 +344,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Go%E7%BB%83%E4%B9%A0/">#Go练习</a>
+        <a href="/tags/Go/">#Go</a>
       
     </div>
   
@@ -339,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【Go练习】TCP 端口扫描器</div>
-      <div>https://zyweven.github.io/2023/03/02/【Go练习】TCP 端口扫描器/</div>
+      <div>【Go基础】包管理</div>
+      <div>https://zyweven.github.io/2023/03/05/【Go基础】包管理1——GOPATH and Vendor/</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月2日</div>
+          <div>2023年3月5日</div>
         </div>
       
       
@@ -384,9 +401,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%861%E2%80%94%E2%80%94GOPATH%20and%20Vendor/" title="【Go基础】包管理">
+                      <a href="/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/" title="【Go基础】包管理2——GO Module">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【Go基础】包管理</span>
+                        <span class="hidden-mobile">【Go基础】包管理2——GO Module</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -394,8 +411,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/01/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91Go%E5%AE%89%E8%A3%85/" title="【Go基础】Go安装">
-                        <span class="hidden-mobile">【Go基础】Go安装</span>
+                      <a href="/2023/03/02/%E3%80%90Go%E7%BB%83%E4%B9%A0%E3%80%91TCP%20%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8/" title="【Go练习】TCP 端口扫描器">
+                        <span class="hidden-mobile">【Go练习】TCP 端口扫描器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

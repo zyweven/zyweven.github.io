@@ -16,12 +16,12 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Go 的包管理经历了三个演变过程： GOPATH -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果">
+    <meta name="description" content="Go 的包管理经历了三个演变过程： GOPATH  -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果当前的 G">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Go基础】包管理">
 <meta property="og:url" content="https://zyweven.github.io/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%861%E2%80%94%E2%80%94GOPATH%20and%20Vendor/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="Go 的包管理经历了三个演变过程： GOPATH -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果">
+<meta property="og:description" content="Go 的包管理经历了三个演变过程： GOPATH  -&gt; Vendor -&gt; GO Module 目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。 GOPATH Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。 GOPATH 的使用 如果当前的 G">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-05T02:06:00.000Z">
 <meta property="article:modified_time" content="2023-03-05T02:30:25.090Z">
@@ -285,20 +285,23 @@
               <div class="markdown-body">
                 
                 <p>Go 的包管理经历了三个演变过程：</p>
-<p><strong>GOPATH</strong> -&gt; <strong>Vendor</strong> -&gt; <strong>GO Module</strong></p>
+<p><strong>GOPATH</strong>  -&gt; <strong>Vendor</strong> -&gt; <strong>GO Module</strong></p>
 <p>目前基本都使用的是 GO Module 的方式来进行包管理，不过这里先看前两个。</p>
-<h2 id="gopath">GOPATH</h2>
+<h2 id="GOPATH">GOPATH</h2>
 <p>Go 编译器可以在本地 GOPATH 环境变量配置的路径下，搜寻 Go 程序依赖的第三方包。如果存在，就使用这个本地包进行编译；如果不存在，就会报编译错误。</p>
-<h3 id="gopath-的使用">GOPATH 的使用</h3>
+<h3 id="GOPATH-的使用">GOPATH 的使用</h3>
 <p>如果当前的 GOPATH 为：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export GOPATH=/usr/local/goprojects:/home/tonybai/go<br></code></pre></td></tr></table></figure>
-<p>那么 Go 编译器在编译 Go 程序时，就会在下面两个路径下搜索第三方依赖包是否存在： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/local/goprojects/src/github.com/user/repo<br>/home/tonybai/go/src/github.com/user/repo<br></code></pre></td></tr></table></figure></p>
-<p>如果没有找到的话，就需要程序员使用 go get 来将本地缺失的第三方依赖包下载到本地如： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/sirupsen/logrus<br></code></pre></td></tr></table></figure></p>
-<p>这里的 go get 命令，不仅能将 logrus 包下载到 GOPATH 环境变量配置的目录下，它还会检查 logrus 的依赖包在本地是否存在，如果不存在，go get 也会一并将它们下载到本地。 但是，go get 下载的包只是那个时刻各个依赖包的最新主线版本。而依赖包是会持续演进的，这就不能保证程序的可重现的构建（Reproduceable Build）。</p>
-<h3 id="gopath-的问题">GOPATH 的问题</h3>
+<p>那么 Go 编译器在编译 Go 程序时，就会在下面两个路径下搜索第三方依赖包是否存在：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/local/goprojects/src/github.com/user/repo<br>/home/tonybai/go/src/github.com/user/repo<br></code></pre></td></tr></table></figure>
+<p>如果没有找到的话，就需要程序员使用 go get 来将本地缺失的第三方依赖包下载到本地如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/sirupsen/logrus<br></code></pre></td></tr></table></figure>
+<p>这里的 go get 命令，不仅能将 logrus 包下载到 GOPATH 环境变量配置的目录下，它还会检查 logrus 的依赖包在本地是否存在，如果不存在，go get 也会一并将它们下载到本地。<br>
+但是，go get 下载的包只是那个时刻各个依赖包的最新主线版本。而依赖包是会持续演进的，这就不能保证程序的可重现的构建（Reproduceable Build）。</p>
+<h3 id="GOPATH-的问题">GOPATH 的问题</h3>
 <p>在 GOPATH 构建模式下，==Go 编译器实质上并没有关注 Go 项目所依赖的第三方包的版本。==</p>
 <p>但 Go 开发者希望自己的 Go 项目所依赖的第三方包版本能受到自己的控制，而不是随意变化。于是 Go 核心开发团队引入了 Vendor 机制试图解决上面的问题。</p>
-<h2 id="vendor">Vendor</h2>
+<h2 id="Vendor">Vendor</h2>
 <p>Go 在 1.5 版本中引入 vendor 机制。vendor 机制本质上就是在 Go 项目的某个特定目录下，将项目的所有依赖包缓存起来，这个特定目录名就是 vendor。</p>
 <p>Go 编译器会优先感知和使用 <strong>vendor 目录</strong>下缓存的第三方包版本，而不是 GOPATH 环境变量所配置的路径下的第三方包版本。这样，无论第三方依赖包自己如何变化，无论 GOPATH 环境变量所配置的路径下的第三方包是否存在、版本是什么，都不会影响到 Go 程序的构建。</p>
 <p>只要将 vendor 目录和项目源码一样提交到代码仓库，那么其他开发者下载这个项目，都可以实现可重现的构建。因此，如果使用 vendor 机制管理第三方依赖包，最佳实践就是将 vendor 一并提交到代码仓库中。</p>

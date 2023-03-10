@@ -16,12 +16,12 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一些深度学习概念 一些应该懂的概念 一些数学符号的意思 \(~\) 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”这是场论中的符号，是矢量微分算">
+    <meta name="description" content="一些深度学习概念 一些应该懂的概念 一些数学符号的意思 $~$ 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”这是场论中的符号，是矢量微分算符。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习问答笔记">
 <meta property="og:url" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="一些深度学习概念 一些应该懂的概念 一些数学符号的意思 \(~\) 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”这是场论中的符号，是矢量微分算">
+<meta property="og:description" content="一些深度学习概念 一些应该懂的概念 一些数学符号的意思 $~$ 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”这是场论中的符号，是矢量微分算符。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531210100834.png">
 <meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211045714.png">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.3k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          30 分钟
+          28 分钟
         
       </span>
     
@@ -299,101 +299,144 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一些深度学习概念">一些深度学习概念</h1>
+                <h1>一些深度学习概念</h1>
 <h2 id="一些应该懂的概念">一些应该懂的概念</h2>
 <h2 id="一些数学符号的意思">一些数学符号的意思</h2>
-<p><span class="math inline">\(~\)</span> 符号在数学中是等价于意思，表示前后相等的意思</p>
-<p><strong>△</strong>是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割</p>
-<p>▽读Nabla，奈不拉，也可以读作"Del”这是场论中的符号，是矢量微分算符。高等数学中的梯度，散度，旋度都会用到这个算符。其二阶导数中旋度的散度又称Laplace算符。</p>
-<h3 id="iid独立同分布假设">IID独立同分布假设</h3>
-<p>机器学习领域有个很重要的假设：<strong>IID独立同分布假设</strong>，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。 ### 正交 若某空间（此空间为内积空间）中两向量的内积为0，则它们正交。类似地，若某空间（内积空间）中的向量v与子空间A中的每个向量都正交，那么这个向量和子空间A正交。若内积空间的子空间A和B满足一者中的每个向量都与另一者正交，那么它们互为正交子空间。 ### <span class="math inline">\(\Vert\)</span> 的意思</p>
+<p>$~$ 符号在数学中是等价于意思，表示前后相等的意思</p>
+<p><strong>△</strong>是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式<br>
+3、表示变量的增量,如△x,△y<br>
+4、表示一个小量<br>
+5、表示差分<br>
+6、在Riemann定积分理论中表示一个区间的分割</p>
+<p>▽读Nabla，奈不拉，也可以读作&quot;Del”这是场论中的符号，是矢量微分算符。高等数学中的梯度，散度，旋度都会用到这个算符。其二阶导数中旋度的散度又称Laplace算符。</p>
+<h3 id="IID独立同分布假设">IID独立同分布假设</h3>
+<p>机器学习领域有个很重要的假设：<strong>IID独立同分布假设</strong>，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。</p>
+<h3 id="正交">正交</h3>
+<p>若某空间（此空间为内积空间）中两向量的内积为0，则它们正交。类似地，若某空间（内积空间）中的向量v与子空间A中的每个向量都正交，那么这个向量和子空间A正交。若内积空间的子空间A和B满足一者中的每个向量都与另一者正交，那么它们互为正交子空间。</p>
+<h3 id="Vert-的意思">$\Vert$ 的意思</h3>
 <p>x和y是向量，有时候会用双竖线，来和数的绝对值区分</p>
 <p>两竖里面是未知数，表示范数</p>
-<p>x和y是向量，有时候会用双竖线，来和数的绝对值区分，||X-Y||就是向量作差之后各分量的平方和的开根号。<span class="math inline">\(\sqrt{(x-y)^{2}}\)</span></p>
+<p>x和y是向量，有时候会用双竖线，来和数的绝对值区分，||X-Y||就是向量作差之后各分量的平方和的开根号。$\sqrt{(x-y)^{2}}$</p>
 <p>一般的双竖线是指一个度量空间的元素X和Y之间的度量</p>
 <h3 id="理解卷积神经网络各个层的作用">理解卷积神经网络各个层的作用</h3>
-<p>卷积层与池化层 https://blog.csdn.net/qq_30979017/article/details/79506593</p>
-<p>激励层：https://www.zhihu.com/question/22334626</p>
-<p>全连接层：https://www.zhihu.com/question/41037974</p>
-<p>feature map 的数量就是channels ### 卷积计算 squeue input,squeue kernel <span class="math display">\[ s=strides,p=padding,i=input size,o=output size,k=kernel\]</span> #### No zero padding, unit strides <span class="math display">\[s=1,p=0时\\
-有o=(i-k)+1\]</span></p>
+<p>卷积层与池化层  <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30979017/article/details/79506593">https://blog.csdn.net/qq_30979017/article/details/79506593</a></p>
+<p>激励层：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22334626">https://www.zhihu.com/question/22334626</a></p>
+<p>全连接层：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/41037974">https://www.zhihu.com/question/41037974</a></p>
+<p>feature map 的数量就是channels</p>
+<h3 id="卷积计算">卷积计算</h3>
+<p>squeue input,squeue kernel<br>
+$$ s=strides,p=padding,i=input size,o=output size,k=kernel$$</p>
+<h4 id="No-zero-padding-unit-strides">No zero padding, unit strides</h4>
+<p>$$s=1,p=0时\<br>
+有o=(i-k)+1$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531210100834.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531210100834">
-<h4 id="zero-padding-unit-strides">Zero padding, unit strides</h4>
-<p><span class="math display">\[s=1\\
-有o=(i-k)+2p+1\]</span></p>
+<h4 id="Zero-padding-unit-strides">Zero padding, unit strides</h4>
+<p>$$s=1\<br>
+有o=(i-k)+2p+1$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211045714.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211045714">
-<h4 id="half-same-padding">Half (same) padding</h4>
-<p><span class="math display">\[any\ i\ and\ k=2n+1,s=1\ and p=\lfloor k/2 \rfloor=n\\
-有o=i+2\lfloor k/2 \rfloor-(k-1)\\
-=i+2n-2n\\=i\]</span> <strong>可以使得output size==input size</strong></p>
+<h4 id="Half-same-padding">Half (same) padding</h4>
+<p>$$any\ i\ and\ k=2n+1,s=1\ and p=\lfloor k/2 \rfloor=n\<br>
+有o=i+2\lfloor k/2 \rfloor-(k-1)\<br>
+=i+2n-2n\=i$$<br>
+<strong>可以使得output size==input size</strong></p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531205637329.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531205637329">
 <h4 id="full-padding">full padding</h4>
-<p><span class="math display">\[any\ i\ and\ k,p=k-1,s=1\\
-有o=i+2(k-1)-k+1\\
-=i+(k-1)\]</span> <strong>在此设置中，考虑了内核在输入要素图上可能的部分或全部叠加。</strong></p>
+<p>$$any\ i\ and\ k,p=k-1,s=1\<br>
+有o=i+2(k-1)-k+1\<br>
+=i+(k-1)$$<br>
+<strong>在此设置中，考虑了内核在输入要素图上可能的部分或全部叠加。</strong></p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211202283.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211202283">
-<h4 id="no-zero-padding-non-unit-strides">　No zero padding, non-unit strides</h4>
-<p><span class="math display">\[any\ i,k,s,and\ p=0\\
-o=\lfloor\frac{i-k}{s} \rfloor+1\]</span></p>
+<h4 id="No-zero-padding-non-unit-strides">No zero padding, non-unit strides</h4>
+<p>$$any\ i,k,s,and\ p=0\<br>
+o=\lfloor\frac{i-k}{s} \rfloor+1$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211255679.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211255679">
-<h4 id="zero-padding-non-unit-strides">Zero padding, non-unit strides</h4>
-<p><span class="math display">\[any\ i,k,p,s\\
-o=\lfloor\frac{i+2p-k}{s}\rfloor+1\]</span> <strong>在i+2p-k是s的倍数的情况下，对于input size j=i+a,a属于{0,,,s-1}，将会有相同的output size</strong></p>
+<h4 id="Zero-padding-non-unit-strides">Zero padding, non-unit strides</h4>
+<p>$$any\ i,k,p,s\<br>
+o=\lfloor\frac{i+2p-k}{s}\rfloor+1$$<br>
+<strong>在i+2p-k是s的倍数的情况下，对于input size j=i+a,a属于{0,s-1}，将会有相同的output size</strong></p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211336023.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211336023">
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211401478.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211401478">
 <h2 id="池化计算">池化计算</h2>
-<p>pooling没有zero padding属性，计算起来简单得多。 <span class="math display">\[any\ i,k\ and s\\
-有o=\lfloor\frac{i-k}{s}\rfloor+1\]</span></p>
-<h2 id="反卷积转置卷积计算transposed-convolution-arithmetic">反卷积（转置卷积）计算Transposed convolution arithmetic</h2>
-<p>转置卷积不是数学意义上的矩阵的逆。 置换的卷积并不能保证恢复输入本身，因为它不是定义为卷积的逆，而是返回一个具有相同宽度和高度的特征图 ### No zero padding, unit strides, transposed <span class="math display">\[一个s=1,p=0的卷积和一个k&#39;=k,s&#39;=s,p&#39;=k-1的转置卷积，\\他们的output size为\\
-o&#39;=i&#39;+(k-1)\]</span> 和 fully padded convolution with unit strides的情况下的计算公式一样的。</p>
+<p>pooling没有zero padding属性，计算起来简单得多。<br>
+$$any\ i,k\ and s\<br>
+有o=\lfloor\frac{i-k}{s}\rfloor+1$$</p>
+<h2 id="反卷积（转置卷积）计算Transposed-convolution-arithmetic">反卷积（转置卷积）计算Transposed convolution arithmetic</h2>
+<p>转置卷积不是数学意义上的矩阵的逆。<br>
+置换的卷积并不能保证恢复输入本身，因为它不是定义为卷积的逆，而是返回一个具有相同宽度和高度的特征图</p>
+<h3 id="No-zero-padding-unit-strides-transposed">No zero padding, unit strides, transposed</h3>
+<p>$$一个s=1,p=0的卷积和一个k’=k,s’=s,p’=k-1的转置卷积，\他们的output size为\<br>
+o’=i’+(k-1)$$<br>
+和 fully padded convolution with unit strides的情况下的计算公式一样的。</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210301346.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210301346">
-<h3 id="zero-padding-unit-strides-transposed">Zero padding, unit strides, transposed</h3>
-<p><span class="math display">\[卷积:s-1,k\ and\ p\ 随意，反卷积\ k&#39;=k,s&#39;=s\ and\ p&#39;=k-p-1\\
-o&#39;=i&#39;+(k-1)-2p\]</span></p>
+<h3 id="Zero-padding-unit-strides-transposed">Zero padding, unit strides, transposed</h3>
+<p>$$卷积:s-1,k\ and\ p\ 随意，反卷积\ k’=k,s’=s\ and\ p’=k-p-1\<br>
+o’=i’+(k-1)-2p$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210240089.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210240089">
-<h3 id="half-same-padding-transposed">Half (same) padding, transposed</h3>
-<p><span class="math display">\[卷积：k=2n+1,s=1,p=\lfloor k/2 \rfloor =n,反卷积：k&#39;=k,s&#39;=s\ and\ p&#39;=p \\
-o&#39;=i&#39;+(k-1)-2p\\
-=i&#39;\]</span></p>
+<h3 id="Half-same-padding-transposed">Half (same) padding, transposed</h3>
+<p>$$卷积：k=2n+1,s=1,p=\lfloor k/2 \rfloor =n,反卷积：k’=k,s’=s\ and\ p’=p \<br>
+o’=i’+(k-1)-2p\<br>
+=i’$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210220999.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210220999">
 <h3 id="full-padding-transposed">full padding, transposed</h3>
-<p><span class="math display">\[卷积：s=1,k\ and\ p=k-1,反卷积:k&#39;=k,s&#39;=s\ and p&#39;=0\\
-o&#39;=i&#39;+(k-1)-2p\\
-=i&#39;-(k-1)\]</span></p>
+<p>$$卷积：s=1,k\ and\ p=k-1,反卷积:k’=k,s’=s\ and p’=0\<br>
+o’=i’+(k-1)-2p\<br>
+=i’-(k-1)$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210139154.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210139154">
-<h3 id="no-zero-padding-non-unit-strides-transposed">No zero padding, non-unit strides, transposed</h3>
-<p><span class="math display">\[o&#39;=s(i&#39;-1)+k\]</span></p>
+<h3 id="No-zero-padding-non-unit-strides-transposed">No zero padding, non-unit strides, transposed</h3>
+<p>$$o’=s(i’-1)+k$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205723838.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602205723838">
 <h3 id="zero-padding-non-unit-strides-transposed">zero padding, non-unit strides, transposed</h3>
-<p><span class="math display">\[o&#39;=s(i&#39;-1)+k-2p\]</span></p>
+<p>$$o’=s(i’-1)+k-2p$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205648363.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602205648363">
-<p><span class="math display">\[o&#39;=s(i&#39;-1)+a+k-2p\]</span></p>
+<p>$$o’=s(i’-1)+a+k-2p$$</p>
 
 <h2 id="空洞卷积">空洞卷积</h2>
-<p>空洞卷积新增了d空洞率这个要素。 因此用有效内核大小来理解空洞卷积的内核大小 有效内核大小的计算如下： <span class="math display">\[k&#39;=k+(k-1)(d-1)\]</span> 把k'带入公式6可以得到 <span class="math display">\[o=\lfloor \frac{i+2p-k-(k-1)(d-1)}{s}+1\rfloor\]</span></p>
+<p>空洞卷积新增了d空洞率这个要素。<br>
+因此用有效内核大小来理解空洞卷积的内核大小<br>
+有效内核大小的计算如下：<br>
+$$k’=k+(k-1)(d-1)$$<br>
+把k’带入公式6可以得到<br>
+$$o=\lfloor \frac{i+2p-k-(k-1)(d-1)}{s}+1\rfloor$$</p>
 <img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602204631600.png" srcset="/img/loading.gif" lazyload class="" title="深度学习问答笔记&#x2F;image-20200602204631600">
 <h2 id="神经网络不收敛的原因">神经网络不收敛的原因</h2>
-<p>1、忘记对你的数据进行归一化 2、忘记检查输出结果 3、没有对数据进行预处理 4、没有使用任何的正则化方法 5、使用了一个太大的 batch size 6、使用一个错误的学习率 7、在最后一层使用错误的激活函数 8、网络包含坏的梯度 9、网络权重没有正确的初始化 10、使用了一个太深的神经网络 11、隐藏层神经元数量设置不正确 https://zhuanlan.zhihu.com/p/369716572</p>
-<h1 id="数据集">数据集</h1>
+<p>1、忘记对你的数据进行归一化<br>
+2、忘记检查输出结果<br>
+3、没有对数据进行预处理<br>
+4、没有使用任何的正则化方法<br>
+5、使用了一个太大的 batch size<br>
+6、使用一个错误的学习率<br>
+7、在最后一层使用错误的激活函数<br>
+8、网络包含坏的梯度<br>
+9、网络权重没有正确的初始化<br>
+10、使用了一个太深的神经网络<br>
+11、隐藏层神经元数量设置不正确<br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369716572">https://zhuanlan.zhihu.com/p/369716572</a></p>
+<h1>数据集</h1>
 <h2 id="人脸">人脸</h2>
 <p>一个人脸数据集，标签是自己的txt和mat不过网上有好心人转成了voc</p>
-<p>http://shuoyang1213.me/WIDERFACE/ ## COCO COCO简介 https://arleyzhang.github.io/articles/e5b86f16/</p>
-<h2 id="casia-b">CASIA-B</h2>
-<p>一个比较经典的步态数据集 GaitDatasetB-silh文件里面 第一层为001 002 。。。表示受试者</p>
+<p><a target="_blank" rel="noopener" href="http://shuoyang1213.me/WIDERFACE/">http://shuoyang1213.me/WIDERFACE/</a></p>
+<h2 id="COCO">COCO</h2>
+<p>COCO简介<br>
+<a target="_blank" rel="noopener" href="https://arleyzhang.github.io/articles/e5b86f16/">https://arleyzhang.github.io/articles/e5b86f16/</a></p>
+<h2 id="CASIA-B">CASIA-B</h2>
+<p>一个比较经典的步态数据集<br>
+GaitDatasetB-silh文件里面<br>
+第一层为001 002 。。。表示受试者</p>
 <p>第二层里面 bg-01 nm-01 cl-01 分别表示正常（NM）（每个受试者6个序列）、带包（BG）（每个受试者2个序列）和穿外套（CL）（每个受试者2个序列），即每个受试者有11×（6+2+2）=110个序列。</p>
 <p>第三层 000 018 036 054 072 090 108 126 144 162 180 表示11个不同的拍摄角度。</p>
-<h2 id="关于-batch-size">关于 Batch-Size</h2>
-<p>https://www.cnblogs.com/WenaoMa/p/10041811.html</p>
-<p>一般来讲 BS 尽可能的多比较好，但我自己目前的经验是 BN 小一点比较好的样子 看具体情况，可能还是大一点的好。</p>
+<h2 id="关于-Batch-Size">关于 Batch-Size</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/WenaoMa/p/10041811.html">https://www.cnblogs.com/WenaoMa/p/10041811.html</a></p>
+<p>一般来讲 BS 尽可能的多比较好，但我自己目前的经验是 BN 小一点比较好的样子<br>
+看具体情况，可能还是大一点的好。</p>
 <h2 id="图像处理">图像处理</h2>
-<p>https://www.cnblogs.com/wangxiaocvpr/p/11656603.html</p>
-<h1 id="网络系列">网络系列</h1>
-<h2 id="yolov3">YOLOV3</h2>
-<p>一个毕设 改进yolov3 https://coreja.com/Schoolwork/2019/05/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95YOLOv3%E7%9A%84%E6%94%B9%E8%BF%9B%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87/</p>
-<p>https://blog.csdn.net/litt1e/article/details/88907542</p>
-<p>https://www.cnblogs.com/llfctt/p/9037677.html</p>
-<p>https://blog.csdn.net/chandanyan8568/article/details/81089083</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangxiaocvpr/p/11656603.html">https://www.cnblogs.com/wangxiaocvpr/p/11656603.html</a></p>
+<h1>网络系列</h1>
+<h2 id="YOLOV3">YOLOV3</h2>
+<p>一个毕设 改进yolov3<br>
+<a target="_blank" rel="noopener" href="https://coreja.com/Schoolwork/2019/05/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95YOLOv3%E7%9A%84%E6%94%B9%E8%BF%9B%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87/">https://coreja.com/Schoolwork/2019/05/物体检测算法YOLOv3的改进——论文/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/litt1e/article/details/88907542">https://blog.csdn.net/litt1e/article/details/88907542</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/llfctt/p/9037677.html">https://www.cnblogs.com/llfctt/p/9037677.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chandanyan8568/article/details/81089083">https://blog.csdn.net/chandanyan8568/article/details/81089083</a></p>
 
                 
               </div>

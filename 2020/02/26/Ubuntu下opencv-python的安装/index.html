@@ -16,12 +16,12 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装命令： 1pip install opencv-python 遇到的问题： 12   from .cv2 import *ImportError: libSM.so.6: cannot open shared object file: No such file or directory 解决方案： 1sudo apt-get install libsm6 libxrender1 li">
+    <meta name="description" content="安装命令： 1pip install opencv-python 遇到的问题： 12   from .cv2 import *ImportError: libSM.so.6: cannot open shared object file: No such file or directory 解决方案： 1sudo apt-get install libsm6 libxrender1 libfont">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux下opencv-python的安装">
 <meta property="og:url" content="https://zyweven.github.io/2020/02/26/Ubuntu%E4%B8%8Bopencv-python%E7%9A%84%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="安装命令： 1pip install opencv-python 遇到的问题： 12   from .cv2 import *ImportError: libSM.so.6: cannot open shared object file: No such file or directory 解决方案： 1sudo apt-get install libsm6 libxrender1 li">
+<meta property="og:description" content="安装命令： 1pip install opencv-python 遇到的问题： 12   from .cv2 import *ImportError: libSM.so.6: cannot open shared object file: No such file or directory 解决方案： 1sudo apt-get install libsm6 libxrender1 libfont">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-26T03:32:44.000Z">
 <meta property="article:modified_time" content="2023-02-28T13:46:21.960Z">
@@ -286,9 +286,9 @@
             
               <div class="markdown-body">
                 
-                <h2 id="安装命令">安装命令：</h2>
+                <h2 id="安装命令：">安装命令：</h2>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> opencv-python<br></code></pre></td></tr></table></figure>
-<h2 id="遇到的问题">遇到的问题：</h2>
+<h2 id="遇到的问题：">遇到的问题：</h2>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">   <span class="hljs-built_in">from</span> .cv2 import *<br>ImportError: libSM.so<span class="hljs-number">.6</span>: cannot <span class="hljs-built_in">open</span> shared object <span class="hljs-built_in">file</span>: No such <span class="hljs-built_in">file</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">directory</span><br></code></pre></td></tr></table></figure>
 <p>解决方案：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install libsm6 libxrender1 libfontconfig1<br></code></pre></td></tr></table></figure>

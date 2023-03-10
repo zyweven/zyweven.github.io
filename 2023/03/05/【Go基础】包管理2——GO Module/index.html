@@ -16,12 +16,12 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="从 Go 1.11 版本开始有 Go Module 一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。 在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mo">
+    <meta name="description" content="从 Go 1.11 版本开始有 Go Module 一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。 在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Go基础】包管理2——GO Module">
 <meta property="og:url" content="https://zyweven.github.io/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="从 Go 1.11 版本开始有 Go Module 一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。 在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mo">
+<meta property="og:description" content="从 Go 1.11 版本开始有 Go Module 一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。 在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mod">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zyweven.github.io/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144529145.png">
 <meta property="og:image" content="https://zyweven.github.io/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144515012.png">
@@ -291,24 +291,28 @@
 <p>一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。</p>
 <p>在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mod 文件，每个 go. mod 文件会定义唯一一个 module，它们是一一对应的关系。</p>
 <p>go. mod 文件所在的顶层目录也被称为 module 的根目录，module 根目录以及它子目录下的所有 Go 包均归属于这个 Go Module，这个 module 也被称为 main module。</p>
-<h2 id="如何创建一个-go-module">如何创建一个 Go module</h2>
+<h2 id="如何创建一个-Go-module">如何创建一个 Go module</h2>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> mod init <span class="hljs-comment">//创建 go. mod 文件，将当前项目变为一个 Go Module；</span><br><span class="hljs-keyword">go</span> mod tidy <span class="hljs-comment">//命令自动更新当前 module 的依赖信息</span><br><span class="hljs-keyword">go</span> build  <span class="hljs-comment">//执行新 module 的构建</span><br></code></pre></td></tr></table></figure>
 <h3 id="指令解析">指令解析</h3>
 <p><strong>go mod init</strong></p>
 <p>go mod init 会在当前项目目录下创建了一个 go. mod 文件。</p>
-<hr />
+<hr>
 <p><strong>go mod tidy</strong></p>
 <p>go mod tidy 命令会扫描 Go 源码，并自动找出项目依赖的外部 Go Module 以及版本，下载这些依赖并更新本地的 go. mod 文件。</p>
 <p>执行完 go mod tidy 后，当前项目除了 go. mod 文件外，还多了一个新文件 go. sum，它同样是由 go mod 相关命令维护的一个文件，它存放了特定版本 module 内容的哈希值，它可以确保项目所依赖的 module 内容，不会被恶意或意外篡改。</p>
 <p>由 go mod tidy 下载的依赖 module 会被放置在本地的 module 缓存路径下，默认值为 $GOPATH[0]/pkg/mod，Go 1.15 及以后版本可以通过 GOMODCACHE 环境变量，自定义本地 module 的缓存路径。</p>
-<hr />
+<hr>
 <p><strong>go build</strong></p>
 <p>go build 命令会读取 go. mod 中的依赖及版本信息，并在本地 module 缓存路径下找到对应版本的依赖 module，执行编译和链接。如果顺利的话，我们会在当前目录下看到一个新生成的可执行文件 module-mode，执行这个文件我们就能得到正确结果了。</p>
-<h2 id="go-module-构建模式的特点">Go Module 构建模式的特点</h2>
+<h2 id="Go-Module-构建模式的特点">Go Module 构建模式的特点</h2>
 <p>有两个特点：</p>
 <ul>
-<li><p>语义导入版本机制</p></li>
-<li><p>最小版本选择原则</p></li>
+<li>
+<p>语义导入版本机制</p>
+</li>
+<li>
+<p>最小版本选择原则</p>
+</li>
 </ul>
 <h3 id="语义导入版本机制">语义导入版本机制</h3>
 <img src="/2023/03/05/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144529145.png" srcset="/img/loading.gif" lazyload class="">
@@ -336,13 +340,23 @@
 <h3 id="升级-降级依赖的版本">升级 / 降级依赖的版本</h3>
 <p>以 logrus 为例</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">使用一下指令可以查询logrus的多个发布版本</span><br>go list -m -versions github.com/sirupsen/logrus<br><br>github.com/sirupsen/logrus v0.1.0 v0.1.1 v0.2.0 v0.3.0 v0.4.0 v0.4.1 v0.5.0 v0.5.1 v0.6.0 v0.6.1 v0.6.2 v0.6.3 v0.6.4 v0.6.5 v0.6.6 v0.7.0 v0.7.1 v0.7.2 ...<br></code></pre></td></tr></table></figure>
-<p>如果我们想从 v1.8.1 降到 v1.7.0，可以使用： <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/sirupsen/logrus@v1.7.0<br><br>go: downloading github.com/sirupsen/logrus v1.7.0<br>go get: downgraded github.com/sirupsen/logrus v1.8.1 =&gt; v1.7.0<br></code></pre></td></tr></table></figure></p>
-<p>或者使用 go mod tidy 也可以，但是要先编辑 go mod 明确告知我们要依赖 v1.7.0 版本，而不是 v1.8.1。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">go mod edit -require=github.com/sirupsen/logrus@v1.7.0<br><br>go mod tidy       <br><br>go: downloading github.com/sirupsen/logrus v1.7.0<br></code></pre></td></tr></table></figure></p>
+<p>如果我们想从 v1.8.1 降到 v1.7.0，可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/sirupsen/logrus@v1.7.0<br><br>go: downloading github.com/sirupsen/logrus v1.7.0<br>go get: downgraded github.com/sirupsen/logrus v1.8.1 =&gt; v1.7.0<br></code></pre></td></tr></table></figure>
+<p>或者使用 go mod tidy 也可以，但是要先编辑 go mod 明确告知我们要依赖 v1.7.0 版本，而不是 v1.8.1。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">go mod edit -require=github.com/sirupsen/logrus@v1.7.0<br><br>go mod tidy       <br><br>go: downloading github.com/sirupsen/logrus v1.7.0<br></code></pre></td></tr></table></figure>
 <h3 id="添加一个主版本号大于-1-的依赖">添加一个主版本号大于 1 的依赖</h3>
-<p>语义导入版本机制有一个原则：如果新旧版本的包使用相同的导入路径，那么新包与旧包是兼容的。也就是说，<strong>如果新旧两个包不兼容，那么我们就应该采用不同的导入路径。</strong> 如果我们要为 Go 项目添加主版本号大于 1 的依赖，我们就需要使用“语义导入版本”机制，在声明它的导入路径的基础上，加上版本号信息。 比如 redis 的导入： <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>  _ <span class="hljs-string">&quot;github.com/go-redis/redis/v7&quot;</span> <span class="hljs-comment">// “_”为空导入</span><br>  <span class="hljs-string">&quot;github.com/google/uuid&quot;</span><br>  <span class="hljs-string">&quot;github.com/sirupsen/logrus&quot;</span><br>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  logrus.Println(<span class="hljs-string">&quot;hello, go module mode&quot;</span>)<br>  logrus.Println(uuid.NewString())<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>语义导入版本机制有一个原则：如果新旧版本的包使用相同的导入路径，那么新包与旧包是兼容的。也就是说，<strong>如果新旧两个包不兼容，那么我们就应该采用不同的导入路径。</strong><br>
+如果我们要为 Go 项目添加主版本号大于 1 的依赖，我们就需要使用“语义导入版本”机制，在声明它的导入路径的基础上，加上版本号信息。<br>
+比如 redis 的导入：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>  _ <span class="hljs-string">&quot;github.com/go-redis/redis/v7&quot;</span> <span class="hljs-comment">// “_”为空导入</span><br>  <span class="hljs-string">&quot;github.com/google/uuid&quot;</span><br>  <span class="hljs-string">&quot;github.com/sirupsen/logrus&quot;</span><br>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  logrus.Println(<span class="hljs-string">&quot;hello, go module mode&quot;</span>)<br>  logrus.Println(uuid.NewString())<br>&#125;<br></code></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/go-redis/redis/v7<br><br>go: downloading github.com/go-redis/redis/v7 v7.4.1<br>go: downloading github.com/go-redis/redis v6.15.9+incompatible<br>go get: added github.com/go-redis/redis/v7 v7.4.1<br></code></pre></td></tr></table></figure>
 <h3 id="升级依赖版本到一个不兼容版本">升级依赖版本到一个不兼容版本</h3>
-<p>假如我们想把 redis v7 升级到 v8 首先在代码中把 v7 改成 v8 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>  _ <span class="hljs-string">&quot;github.com/go-redis/redis/v8&quot;</span><br>  <span class="hljs-string">&quot;github.com/google/uuid&quot;</span><br>  <span class="hljs-string">&quot;github.com/sirupsen/logrus&quot;</span><br>)<br></code></pre></td></tr></table></figure> 然后 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/go-redis/redis/v8<br><br>go: downloading github.com/go-redis/redis/v8 v8.11.1<br>go: downloading github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f<br>go: downloading github.com/cespare/xxhash/v2 v2.1.1<br>go get: added github.com/go-redis/redis/v8 v8.11.1<br></code></pre></td></tr></table></figure> 就可以了</p>
+<p>假如我们想把 redis v7 升级到 v8<br>
+首先在代码中把 v7 改成 v8</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>  _ <span class="hljs-string">&quot;github.com/go-redis/redis/v8&quot;</span><br>  <span class="hljs-string">&quot;github.com/google/uuid&quot;</span><br>  <span class="hljs-string">&quot;github.com/sirupsen/logrus&quot;</span><br>)<br></code></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">go get github.com/go-redis/redis/v8<br><br>go: downloading github.com/go-redis/redis/v8 v8.11.1<br>go: downloading github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f<br>go: downloading github.com/cespare/xxhash/v2 v2.1.1<br>go get: added github.com/go-redis/redis/v8 v8.11.1<br></code></pre></td></tr></table></figure>
+<p>就可以了</p>
 <h3 id="移除一个依赖">移除一个依赖</h3>
 <p>要想彻底从项目中移除 go. mod 中的依赖项，仅从源码中删除对依赖项的导入语句还不够。这是因为如果源码满足成功构建的条件，go build 命令是不会“多管闲事”地清理 go. mod 中多余的依赖项的。</p>
 <p>那正确的做法是怎样的呢？我们还得用 go mod tidy 命令，将这个依赖项彻底从 Go Module 构建上下文中清除掉。go mod tidy 会自动分析源码依赖，而且将不再使用的依赖从 go. mod 和 go. sum 中移除。</p>

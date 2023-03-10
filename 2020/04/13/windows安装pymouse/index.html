@@ -16,12 +16,12 @@
   <meta name="author" content="even zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named &#39;windows&#39; 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement">
+    <meta name="description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named ‘windows’ 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement pyHook">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows安装pymouse">
 <meta property="og:url" content="https://zyweven.github.io/2020/04/13/windows%E5%AE%89%E8%A3%85pymouse/index.html">
 <meta property="og:site_name" content="Even">
-<meta property="og:description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named &#39;windows&#39; 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement">
+<meta property="og:description" content="安装pymouse 1pip install pymouse 遇到报错 ModuleNotFoundError: No module named ‘windows’ 此时需要下载一个叫 PyUserinput的包 1pip install PyUserinput 但是遭遇 Could not find a version that satisfies the requirement pyHook">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200413172042294.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          536 字
+          509 字
         
       </span>
     
@@ -288,29 +288,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="安装pymouse">安装pymouse</h1>
+                <h1>安装pymouse</h1>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pymouse<br></code></pre></td></tr></table></figure>
 <p>遇到报错</p>
-<h2 id="modulenotfounderror-no-module-named-windows">ModuleNotFoundError: No module named 'windows'</h2>
+<h2 id="ModuleNotFoundError-No-module-named-‘windows’">ModuleNotFoundError: No module named ‘windows’</h2>
 <p>此时需要下载一个叫 PyUserinput的包</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install PyUserinput<br></code></pre></td></tr></table></figure>
 <p>但是遭遇</p>
-<h2 id="could-not-find-a-version-that-satisfies-the-requirement-pyhook-from-pyuserinput-from-versions-no-matching-distribution-found-for-pyhook-from-pyuserinput">Could not find a version that satisfies the requirement pyHook (from PyUserinput) (from versions: )No matching distribution found for pyHook (from PyUserinput)</h2>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20200413172042294.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
+<h2 id="Could-not-find-a-version-that-satisfies-the-requirement-pyHook-from-PyUserinput-from-versions-No-matching-distribution-found-for-pyHook-from-PyUserinput">Could not find a version that satisfies the requirement pyHook (from PyUserinput) (from versions: )No matching distribution found for pyHook (from PyUserinput)</h2>
+<p><img src="https://img-blog.csdnimg.cn/20200413172042294.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 <p>需要下载个pyHook ，不过明显不能通过pip直接下载了</p>
-<p>https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook</p>
+<p><a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook">https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyhook</a></p>
 <p>去这个网址里面找到pyHook，下载符合自己python版本的whl文件在电脑上</p>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
+<p><img src="https://img-blog.csdnimg.cn/20200413172248659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppdWh1Nw==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 <p>然后cmd里面切换到该whl文件所在地方。</p>
 <p>输入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyHook-<span class="hljs-number">1.5</span><span class="hljs-number">.1</span>-cp36-cp36m-win_amd64.whl<br>(因为我的python是<span class="hljs-number">3.6</span>版本的)<br></code></pre></td></tr></table></figure>
-<figure>
-<img src="https://img-blog.csdnimg.cn/20200413172459656.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
+<p><img src="https://img-blog.csdnimg.cn/20200413172459656.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 <p>就下载好了</p>
 <p>这时再下载好PyUserinput就万事OK了</p>
 <p>pymouse也就可以用了</p>

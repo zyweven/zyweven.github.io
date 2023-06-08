@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/1.png">
+  <link rel="icon" href="/img/1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#6a598c">
+  <meta name="author" content="even zhang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="后面有机会会考虑整理一下。 一些深度学习概念 一些应该懂的概念 一些数学符号的意思 \(~\) 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习问答笔记">
+<meta property="og:url" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Even">
+<meta property="og:description" content="后面有机会会考虑整理一下。 一些深度学习概念 一些应该懂的概念 一些数学符号的意思 \(~\) 符号在数学中是等价于意思，表示前后相等的意思 △是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割 ▽读Nabla，奈不拉，也可以读作&quot;Del”">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531210100834.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211045714.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531205637329.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211202283.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211255679.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211336023.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211401478.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210301346.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210240089.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210220999.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210139154.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205723838.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205648363.png">
+<meta property="og:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602204631600.png">
+<meta property="article:published_time" content="2020-07-04T02:32:23.000Z">
+<meta property="article:modified_time" content="2023-06-08T14:03:56.129Z">
+<meta property="article:author" content="even zhang">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zyweven.github.io/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531210100834.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>深度学习问答笔记 - Even</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zyweven.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Even</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/backgroud3.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">深度学习问答笔记</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-07-04 10:32" pubdate>
+          2020年7月4日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">深度学习问答笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>后面有机会会考虑整理一下。</p>
+<h1 id="一些深度学习概念">一些深度学习概念</h1>
+<h2 id="一些应该懂的概念">一些应该懂的概念</h2>
+<h2 id="一些数学符号的意思">一些数学符号的意思</h2>
+<p><span class="math inline">\(~\)</span> 符号在数学中是等价于意思，表示前后相等的意思</p>
+<p><strong>△</strong>是大写希腊字母Delta,在数学中常见用法的有：1、三角形2、二次函数根的判别式 3、表示变量的增量,如△x,△y 4、表示一个小量 5、表示差分 6、在Riemann定积分理论中表示一个区间的分割</p>
+<p>▽读Nabla，奈不拉，也可以读作"Del”这是场论中的符号，是矢量微分算符。高等数学中的梯度，散度，旋度都会用到这个算符。其二阶导数中旋度的散度又称Laplace算符。</p>
+<h3 id="iid独立同分布假设">IID独立同分布假设</h3>
+<p>机器学习领域有个很重要的假设：<strong>IID独立同分布假设</strong>，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。 ### 正交 若某空间（此空间为内积空间）中两向量的内积为0，则它们正交。类似地，若某空间（内积空间）中的向量v与子空间A中的每个向量都正交，那么这个向量和子空间A正交。若内积空间的子空间A和B满足一者中的每个向量都与另一者正交，那么它们互为正交子空间。 ### <span class="math inline">\(\Vert\)</span> 的意思</p>
+<p>x和y是向量，有时候会用双竖线，来和数的绝对值区分</p>
+<p>两竖里面是未知数，表示范数</p>
+<p>x和y是向量，有时候会用双竖线，来和数的绝对值区分，||X-Y||就是向量作差之后各分量的平方和的开根号。<span class="math inline">\(\sqrt{(x-y)^{2}}\)</span></p>
+<p>一般的双竖线是指一个度量空间的元素X和Y之间的度量</p>
+<h3 id="理解卷积神经网络各个层的作用">理解卷积神经网络各个层的作用</h3>
+<p>卷积层与池化层 https://blog.csdn.net/qq_30979017/article/details/79506593</p>
+<p>激励层：https://www.zhihu.com/question/22334626</p>
+<p>全连接层：https://www.zhihu.com/question/41037974</p>
+<p>feature map 的数量就是channels ### 卷积计算 squeue input,squeue kernel <span class="math display">\[ s=strides,p=padding,i=input size,o=output size,k=kernel\]</span> #### No zero padding, unit strides <span class="math display">\[s=1,p=0时\\
+有o=(i-k)+1\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531210100834.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531210100834">
+<h4 id="zero-padding-unit-strides">Zero padding, unit strides</h4>
+<p><span class="math display">\[s=1\\
+有o=(i-k)+2p+1\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211045714.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211045714">
+<h4 id="half-same-padding">Half (same) padding</h4>
+<p><span class="math display">\[any\ i\ and\ k=2n+1,s=1\ and p=\lfloor k/2 \rfloor=n\\
+有o=i+2\lfloor k/2 \rfloor-(k-1)\\
+=i+2n-2n\\=i\]</span> <strong>可以使得output size==input size</strong></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531205637329.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531205637329">
+<h4 id="full-padding">full padding</h4>
+<p><span class="math display">\[any\ i\ and\ k,p=k-1,s=1\\
+有o=i+2(k-1)-k+1\\
+=i+(k-1)\]</span> <strong>在此设置中，考虑了内核在输入要素图上可能的部分或全部叠加。</strong></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211202283.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211202283">
+<h4 id="no-zero-padding-non-unit-strides">　No zero padding, non-unit strides</h4>
+<p><span class="math display">\[any\ i,k,s,and\ p=0\\
+o=\lfloor\frac{i-k}{s} \rfloor+1\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211255679.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211255679">
+<h4 id="zero-padding-non-unit-strides">Zero padding, non-unit strides</h4>
+<p><span class="math display">\[any\ i,k,p,s\\
+o=\lfloor\frac{i+2p-k}{s}\rfloor+1\]</span> <strong>在i+2p-k是s的倍数的情况下，对于input size j=i+a,a属于{0,,,s-1}，将会有相同的output size</strong></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211336023.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211336023">
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200531211401478.png" srcset="/img/loading.gif" lazyload class="" title="image-20200531211401478">
+<h2 id="池化计算">池化计算</h2>
+<p>pooling没有zero padding属性，计算起来简单得多。 <span class="math display">\[any\ i,k\ and s\\
+有o=\lfloor\frac{i-k}{s}\rfloor+1\]</span></p>
+<h2 id="反卷积转置卷积计算transposed-convolution-arithmetic">反卷积（转置卷积）计算Transposed convolution arithmetic</h2>
+<p>转置卷积不是数学意义上的矩阵的逆。 置换的卷积并不能保证恢复输入本身，因为它不是定义为卷积的逆，而是返回一个具有相同宽度和高度的特征图 ### No zero padding, unit strides, transposed <span class="math display">\[一个s=1,p=0的卷积和一个k&#39;=k,s&#39;=s,p&#39;=k-1的转置卷积，\\他们的output size为\\
+o&#39;=i&#39;+(k-1)\]</span> 和 fully padded convolution with unit strides的情况下的计算公式一样的。</p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210301346.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210301346">
+<h3 id="zero-padding-unit-strides-transposed">Zero padding, unit strides, transposed</h3>
+<p><span class="math display">\[卷积:s-1,k\ and\ p\ 随意，反卷积\ k&#39;=k,s&#39;=s\ and\ p&#39;=k-p-1\\
+o&#39;=i&#39;+(k-1)-2p\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210240089.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210240089">
+<h3 id="half-same-padding-transposed">Half (same) padding, transposed</h3>
+<p><span class="math display">\[卷积：k=2n+1,s=1,p=\lfloor k/2 \rfloor =n,反卷积：k&#39;=k,s&#39;=s\ and\ p&#39;=p \\
+o&#39;=i&#39;+(k-1)-2p\\
+=i&#39;\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210220999.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210220999">
+<h3 id="full-padding-transposed">full padding, transposed</h3>
+<p><span class="math display">\[卷积：s=1,k\ and\ p=k-1,反卷积:k&#39;=k,s&#39;=s\ and p&#39;=0\\
+o&#39;=i&#39;+(k-1)-2p\\
+=i&#39;-(k-1)\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602210139154.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602210139154">
+<h3 id="no-zero-padding-non-unit-strides-transposed">No zero padding, non-unit strides, transposed</h3>
+<p><span class="math display">\[o&#39;=s(i&#39;-1)+k\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205723838.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602205723838">
+<h3 id="zero-padding-non-unit-strides-transposed">zero padding, non-unit strides, transposed</h3>
+<p><span class="math display">\[o&#39;=s(i&#39;-1)+k-2p\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602205648363.png" srcset="/img/loading.gif" lazyload class="" title="image-20200602205648363">
+<p><span class="math display">\[o&#39;=s(i&#39;-1)+a+k-2p\]</span></p>
+
+<h2 id="空洞卷积">空洞卷积</h2>
+<p>空洞卷积新增了d空洞率这个要素。 因此用有效内核大小来理解空洞卷积的内核大小 有效内核大小的计算如下： <span class="math display">\[k&#39;=k+(k-1)(d-1)\]</span> 把k'带入公式6可以得到 <span class="math display">\[o=\lfloor \frac{i+2p-k-(k-1)(d-1)}{s}+1\rfloor\]</span></p>
+<img src="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%97%AE%E7%AD%94%E7%AC%94%E8%AE%B0/image-20200602204631600.png" srcset="/img/loading.gif" lazyload class="" title="深度学习问答笔记&#x2F;image-20200602204631600">
+<h2 id="神经网络不收敛的原因">神经网络不收敛的原因</h2>
+<p>1、忘记对你的数据进行归一化 2、忘记检查输出结果 3、没有对数据进行预处理 4、没有使用任何的正则化方法 5、使用了一个太大的 batch size 6、使用一个错误的学习率 7、在最后一层使用错误的激活函数 8、网络包含坏的梯度 9、网络权重没有正确的初始化 10、使用了一个太深的神经网络 11、隐藏层神经元数量设置不正确 https://zhuanlan.zhihu.com/p/369716572</p>
+<h1 id="数据集">数据集</h1>
+<h2 id="人脸">人脸</h2>
+<p>一个人脸数据集，标签是自己的txt和mat不过网上有好心人转成了voc</p>
+<p>http://shuoyang1213.me/WIDERFACE/ ## COCO COCO简介 https://arleyzhang.github.io/articles/e5b86f16/</p>
+<h2 id="casia-b">CASIA-B</h2>
+<p>一个比较经典的步态数据集 GaitDatasetB-silh文件里面 第一层为001 002 。。。表示受试者</p>
+<p>第二层里面 bg-01 nm-01 cl-01 分别表示正常（NM）（每个受试者6个序列）、带包（BG）（每个受试者2个序列）和穿外套（CL）（每个受试者2个序列），即每个受试者有11×（6+2+2）=110个序列。</p>
+<p>第三层 000 018 036 054 072 090 108 126 144 162 180 表示11个不同的拍摄角度。</p>
+<h2 id="关于-batch-size">关于 Batch-Size</h2>
+<p>https://www.cnblogs.com/WenaoMa/p/10041811.html</p>
+<p>一般来讲 BS 尽可能的多比较好，但我自己目前的经验是 BN 小一点比较好的样子 看具体情况，可能还是大一点的好。</p>
+<h2 id="图像处理">图像处理</h2>
+<p>https://www.cnblogs.com/wangxiaocvpr/p/11656603.html</p>
+<h1 id="网络系列">网络系列</h1>
+<h2 id="yolov3">YOLOV3</h2>
+<p>一个毕设 改进yolov3 https://coreja.com/Schoolwork/2019/05/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95YOLOv3%E7%9A%84%E6%94%B9%E8%BF%9B%E2%80%94%E2%80%94%E8%AE%BA%E6%96%87/</p>
+<p>https://blog.csdn.net/litt1e/article/details/88907542</p>
+<p>https://www.cnblogs.com/llfctt/p/9037677.html</p>
+<p>https://blog.csdn.net/chandanyan8568/article/details/81089083</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>深度学习问答笔记</div>
+      <div>https://zyweven.github.io/2020/07/04/深度学习问答笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>even zhang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年7月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Q&amp;A/" title="深度学习Q&amp;A">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深度学习Q&amp;A</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/13/windows%E5%AE%89%E8%A3%85pymouse/" title="windows安装pymouse">
+                        <span class="hidden-mobile">windows安装pymouse</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

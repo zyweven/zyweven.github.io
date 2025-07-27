@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="Even">
 <meta property="og:description" content="从 Go 1.11 版本开始有 Go Module 一个 Go Module 是一个 Go 包的集合。module 是有版本的，所以 module 下的包也就有了版本属性。这个 module 与这些包会组成一个独立的版本单元，它们一起打版本、发布和分发。 在 Go Module 模式下，通常一个代码仓库对应一个 Go Module。一个 Go Module 的顶层目录下会放置一个 go. mod">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zyweven.github.io/.io//image-20230305144529145.png">
-<meta property="og:image" content="https://zyweven.github.io/.io//image-20230305144515012.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144529145.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144515012.png">
 <meta property="article:published_time" content="2023-03-05T02:31:00.000Z">
 <meta property="article:modified_time" content="2025-07-27T03:45:43.868Z">
 <meta property="article:author" content="even zhang">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://zyweven.github.io/.io//image-20230305144529145.png">
+<meta name="twitter:image" content="https://zyweven.github.io/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144529145.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -313,7 +313,7 @@
 <li><p>最小版本选择原则</p>
 </li>
 </ul>
-<h3 id="语义导入版本机制"><a href="#语义导入版本机制" class="headerlink" title="语义导入版本机制"></a>语义导入版本机制</h3><p><img src="/.io//image-20230305144529145.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="语义导入版本机制"><a href="#语义导入版本机制" class="headerlink" title="语义导入版本机制"></a>语义导入版本机制</h3><p><img src="/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144529145.png" srcset="/img/loading.gif" lazyload></p>
 <p>如上图，语义版本号分成 3 部分：主版本号 (major)、次版本号 (minor) 和补丁版本号 (patch)。</p>
 <p>例如 logrus module 的版本号是 v1.8.1，这就表示它的主版本号为 1，次版本号为 8，补丁版本号为 1。</p>
 <p>按照语义版本规范，主版本号不同的两个版本是相互不兼容的。而且，在主版本号相同的情况下，次版本号大都是向后兼容次版本号小的版本。补丁版本号也不影响兼容性。</p>
@@ -323,7 +323,7 @@
 <p>这就是 Go 的“语义导入版本”机制，也就是说<strong>通过在包导入路径中引入主版本号的方式，来区别同一个包的不兼容版本，这样一来我们甚至可以同时依赖一个包的两个不兼容版本</strong>：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;github.com/sirupsen/logrus&quot;</span> <span class="hljs-comment">//导入 v1</span><br>    logv2 <span class="hljs-string">&quot;github.com/sirupsen/logrus/v2&quot;</span> <span class="hljs-comment">//导入 v2</span><br>)<br></code></pre></td></tr></table></figure>
 
-<h3 id="最小版本选择原则"><a href="#最小版本选择原则" class="headerlink" title="最小版本选择原则"></a>最小版本选择原则</h3><p><img src="/.io//image-20230305144515012.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="最小版本选择原则"><a href="#最小版本选择原则" class="headerlink" title="最小版本选择原则"></a>最小版本选择原则</h3><p><img src="/%E3%80%90Go%E5%9F%BA%E7%A1%80%E3%80%91%E5%8C%85%E7%AE%A1%E7%90%862%E2%80%94%E2%80%94GO%20Module/image-20230305144515012.png" srcset="/img/loading.gif" lazyload></p>
 <p>在这张图中，myproject 有两个直接依赖 A 和 B，A 和 B 有一个共同的依赖包 C，但 A 依赖 C 的 v1.1.0 版本，而 B 依赖的是 C 的 v1.3.0 版本，并且此时 C 包的最新发布版为 C v1.7.0 。那么我们应该使用 C 的哪个版本？</p>
 <p>对于一些其他依赖管理工具可能会选择依赖项的“最新最大 (Latest Greatest) 版本”，对应到图中的例子，这个版本就是 v1.7.0。</p>
 <p>而对于 <strong>Go</strong> 会在该项目依赖项的所有版本中，选出符合项目整体要求的“最小版本”。</p>

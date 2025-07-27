@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/1.png">
+  <link rel="icon" href="/img/1.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#6a598c">
+  <meta name="author" content="even zhang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅。 握手是为了建立可靠的连接，可靠连接是通过序列号，确认应答，重传机制等来实现的。同时，作为一个广泛使用的网络协议，会通过滑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【计算机网络】TCP相关">
+<meta property="og:url" content="https://zyweven.github.io/2023/03/10/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Even">
+<meta property="og:description" content="TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅。 握手是为了建立可靠的连接，可靠连接是通过序列号，确认应答，重传机制等来实现的。同时，作为一个广泛使用的网络协议，会通过滑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310104141178.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310104330574.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110445185.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110524519.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110753034.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110832280.png">
+<meta property="og:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110859233.png">
+<meta property="article:published_time" content="2023-03-10T02:41:00.000Z">
+<meta property="article:modified_time" content="2023-03-10T05:11:23.974Z">
+<meta property="article:author" content="even zhang">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zyweven.github.io/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310104141178.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【计算机网络】TCP相关 - Even</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zyweven.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Even</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/backgroud3.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">【计算机网络】TCP相关</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-10 10:41" pubdate>
+          2023年3月10日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【计算机网络】TCP相关</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>TCP 的全称叫传输层控制协议（Transmission Control Protocol），⼤部分应⽤使⽤的正是 TCP 传输层协议，⽐如 HTTP 应⽤层协议。TCP 相⽐ UDP 多了很多特性，⽐如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对⽅。</p>
+<p>握手是为了建立可靠的连接，可靠连接是通过序列号，确认应答，重传机制等来实现的。同时，作为一个广泛使用的网络协议，会通过滑动窗口和推迟确认在对数据传输进行优化，在复杂网络时会通过流量控制和拥塞控制对传输进行控制。</p>
+<h2 id="TCP-头部的格式"><a href="#TCP-头部的格式" class="headerlink" title="TCP 头部的格式"></a>TCP 头部的格式</h2><p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310104141178.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>序列号</strong>: 在建立连接时由计算机生成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题。</li>
+<li><strong>确认应答号</strong>: 指下一次「期望」收到的数据的序列号，发送端收到这个确认应答以后可以认为在这个序号以前的数据都已经被正常接收。用来解决不丢包的问题。</li>
+</ul>
+<p><strong>控制位</strong>:</p>
+<ul>
+<li><p>ACK︰该位为 1 时，「确认应答」的字段变为有效，TCP 规定除了最初建立连接时的 SYN 包之外该位必须设置为 1 。</p>
+</li>
+<li><p>RST: 该位为 1 时，表示 TCP 连接中出现异常必须强制断开连接。</p>
+</li>
+<li><p>SYN∶该位为 1 时，表示希望建立连接，并在其「序列号」的字段进行序列号初始值的设定。</p>
+</li>
+<li><p>FN: 该位为 1 时，表示今后不会再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双方的主机之间就可以相互交换 FIN 位为 1 的 TCP 段。</p>
+</li>
+</ul>
+<h2 id="UDP-头部格式"><a href="#UDP-头部格式" class="headerlink" title="UDP 头部格式"></a>UDP 头部格式</h2><p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310104330574.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>目标和源端口: 主要是告诉 UDP 协议应该把报文发给哪个进程。</li>
+<li>包长度: 该字段保存了 UDP 首部的长度跟数据的长度之和。（占位符？）</li>
+<li>校验和: 校验和是为了提供可靠的 UDP 首部和数据而设计。</li>
+</ul>
+<h2 id="有一个-IP-的服务器监听了一个端口，它的-TCP-的最大连接数是多少"><a href="#有一个-IP-的服务器监听了一个端口，它的-TCP-的最大连接数是多少" class="headerlink" title="有一个 IP 的服务器监听了一个端口，它的 TCP 的最大连接数是多少?"></a>有一个 IP 的服务器监听了一个端口，它的 TCP 的最大连接数是多少?</h2><p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110445185.png" srcset="/img/loading.gif" lazyload></p>
+<p>其中：<br>客户端 IP 数最多为：2^32<br>客户端端口数最多为：2^16<br>因此，最大 TCP 连接数为：2^48</p>
+<h2 id="UDP-和-TCP-有什么区别呢？"><a href="#UDP-和-TCP-有什么区别呢？" class="headerlink" title="UDP 和 TCP 有什么区别呢？"></a>UDP 和 TCP 有什么区别呢？</h2><ol>
+<li>连接</li>
+</ol>
+<ul>
+<li>TCP 是面向连接的传输层协议，传输数据前先要建立连接。</li>
+<li>UDP 是不需要连接，即刻传输数据。</li>
+</ul>
+<ol start="2">
+<li>服务对象</li>
+</ol>
+<ul>
+<li>TCP 是一对一的两点服务，即一条连接只有两个端点。</li>
+<li>UDP 支持一对一、—对多、多对多的交互通信</li>
+</ul>
+<ol start="3">
+<li>可靠性</li>
+</ol>
+<ul>
+<li>TCP 是可靠交付数据的，数据可以无差错、不丢失、不重复、按需到达。</li>
+<li>UDP 是尽最大努力交付，不保证可靠交付数据。</li>
+</ul>
+<ol start="4">
+<li>拥塞控制、流量控制</li>
+</ol>
+<ul>
+<li>TCP 有拥塞控制和流量控制机制，保证数据传输的安全性。</li>
+<li>UDP 则没有，即使网络非常拥堵了，也不会影响 UDP 的发送速率。</li>
+</ul>
+<ol start="5">
+<li>首部开销</li>
+</ol>
+<ul>
+<li>TCP 首部长度较长，会有一定的开销，首部在没有使用「选项」字段时是 20 个字节，如果使用了「选项」字段则会变长的。</li>
+<li>UDP 首部有 8 个字节，并且是固定不变的，开销较小。</li>
+</ul>
+<ol start="6">
+<li>传输方式</li>
+</ol>
+<ul>
+<li>TCP 是流式传输，没有边界，但保证顺序和可靠。</li>
+<li>UDP 是一个包一个包的发送，是有边界的，但可能会丢包和乱序。</li>
+</ul>
+<ol start="7">
+<li>分片不同</li>
+</ol>
+<ul>
+<li>TCP 的数据大小如果大于 MSS 大小，则会在传输层进行分片，目标主机收到后，也同样在传输层组装 TCP 数据包，如果中途丢失了一个分片，只需要传输丢失的这个分片。</li>
+<li>UDP 的数据大小如果大于 MTU 大小，则会在 IP 层进行分片，目标主机收到后，在 IP 层组装完数据，接着再传给传输层，但是如果中途丢了一个分片，在实现可靠传输的 UDP 时则就需要重传所有的数据包，这样传输效率非常差，所以通常 UDP 的报文应该小于 MTU。</li>
+</ul>
+<h2 id="TCP-和-UDP-应用场景："><a href="#TCP-和-UDP-应用场景：" class="headerlink" title="TCP 和 UDP 应用场景："></a>TCP 和 UDP 应用场景：</h2><p>由于 TCP 是面向连接，能保证数据的可靠性交付，因此经常用于:</p>
+<ul>
+<li><p>FTP 文件传输</p>
+</li>
+<li><p>HTTP &#x2F; HTTPS</p>
+</li>
+</ul>
+<p>由于 UDP 面向无连接，它可以随时发送数据，再加上 UDP 本身的处理既简单又高效，因此经常用于:</p>
+<ul>
+<li><p>包总量较少的通信，如 DNS . SNMP 等</p>
+</li>
+<li><p>视频、音频等多媒体通信</p>
+</li>
+<li><p>广播通信</p>
+</li>
+</ul>
+<h2 id="如何唯一确定一个-TCP-连接？"><a href="#如何唯一确定一个-TCP-连接？" class="headerlink" title="如何唯一确定一个 TCP 连接？"></a>如何唯一确定一个 TCP 连接？</h2><p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110524519.png" srcset="/img/loading.gif" lazyload><br>通过这四个可以唯一确认一个 tcp 连接。</p>
+<p>源地址和目的地址的字段 (32 位〉是在 IP 头部中，作用是通过 IP 协议发送报文给对方主机。</p>
+<p>源端口和目的端口的字段（16 位〉是在 TCP 头部中，作用是告诉 TCP 协议应该把报文发给哪个进程。</p>
+<h2 id="TCP-连接建立"><a href="#TCP-连接建立" class="headerlink" title="TCP 连接建立"></a>TCP 连接建立</h2><p>需要进行三次握手</p>
+<p>总共需要发送三次报文，其中 SYN 为 1 表示序列号有值，ACK 为 1 表示确认应答号有值。</p>
+<ul>
+<li><p>第一次握手：Client 将 SYN 置 1，随机产生一个初始序列号 seq 发送给 Server，进入 SYN_SENT 状态；</p>
+</li>
+<li><p>第二次握手：Server 收到 Client 的 SYN&#x3D;1 之后，知道客户端请求建立连接，将自己的 SYN 置 1，ACK 置 1，产生一个 acknowledge number&#x3D;sequence number+1，并随机产生一个自己的初始序列号，发送给客户端；进入 SYN_RCVD 状态；</p>
+</li>
+<li><p>第三次握手：客户端检查 acknowledge number 是否为序列号+1，ACK 是否为 1，检查正确之后将自己的 ACK 置为 1，产生一个 acknowledge number&#x3D;服务器发的序列号+1，发送给服务器；进入 ESTABLISHED 状态；服务器检查 ACK 为 1 和 acknowledge number 为序列号+1 之后，也进入 ESTABLISHED 状态；完成三次握手，连接建立。</p>
+</li>
+</ul>
+<h2 id="为什么是三次握手而不是两次或四次？"><a href="#为什么是三次握手而不是两次或四次？" class="headerlink" title="为什么是三次握手而不是两次或四次？"></a>为什么是三次握手而不是两次或四次？</h2><ol>
+<li>三次握手才可以阻止重复历史连接的初始化 (主要原因) </li>
+<li>三次握手才可以同步双方的初始序列号</li>
+<li>三次握手才可以避免资源浪费</li>
+</ol>
+<h3 id="为什么不是两次？"><a href="#为什么不是两次？" class="headerlink" title="为什么不是两次？"></a>为什么不是两次？</h3><p>C: 我要给你发数据</p>
+<p>S: 好的，可以，我知道了</p>
+<ul>
+<li>「两次握手」：无法防止历史连接的建立，会造成双方资源的浪费（尤其是接收方），也无法可靠的同步双方序列号；</li>
+</ul>
+<p>接收方在收到任何的 syn 后就开始分配资源建立连接了。而这个 syn 有可能是旧的已经不用的 syn，也有可能是因为网络延迟而迟到的 syn。而在两次握手的情况下，接收端都会给他们分配资源。</p>
+<p>至多只有连接发起方的起始序列号能被确认， 另一方选择的序列号则得不到确认。</p>
+<p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110753034.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="为什么不是四次？"><a href="#为什么不是四次？" class="headerlink" title="为什么不是四次？"></a>为什么不是四次？</h3><ul>
+<li>「四次握手」：三次握手就已经理论上最少可靠连接建立，所以不需要使用更多的通信次数。</li>
+</ul>
+<p>如果是四次的话，那就是</p>
+<p>C: 我要给你发送数据</p>
+<p>S: 好的，没问题，我知道了</p>
+<p>S：你知道我知道了吗？</p>
+<p>C: 我知道你知道了。</p>
+<p>其中 中间两条可以合并为一条也就是</p>
+<p>好的没问题，你能收到我的消息吗？</p>
+<p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110832280.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="TCP-连接断开"><a href="#TCP-连接断开" class="headerlink" title="TCP 连接断开"></a>TCP 连接断开</h2><p><img src="/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91TCP%E7%9B%B8%E5%85%B3/image-20230310110859233.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>C 打算关闭连接，此时会发送一个 TCP 首部 <code>FIN</code> 标志位被置为 <code>1</code> 的报文，也即 <code>FIN</code> 报文，之后 C 进入 <code>FIN_WAIT_1</code> 状态。</li>
+<li>S 收到该报文后，就向 C 发送 <code>ACK</code> 应答报文，接着 S 进入 <code>CLOSE_WAIT</code> 状态。</li>
+<li>C 收到服务端的 <code>ACK</code> 应答报文后，之后进入 <code>FIN_WAIT_2</code> 状态。</li>
+<li>等待 S 处理完数据后，也向 C 发送 <code>FIN</code> 报文，之后 S 进入 <code>LAST_ACK</code> 状态。</li>
+<li>C 收到 S 的 <code>FIN</code> 报文后，回一个 <code>ACK</code> 应答报文，之后进入 <code>TIME_WAIT</code> 状态</li>
+<li>S 收到了 <code>ACK</code> 应答报文后，就进入了 <code>CLOSE</code> 状态，至此 S 已经完成连接的关闭。</li>
+<li>客户端在经过 <code>2MSL</code> 一段时间后，自动进入 <code>CLOSE</code> 状态，至此客户端也完成连接的关闭。<br>其中：</li>
+<li>关闭连接时，客户端向服务端发送 <code>FIN</code> 时，仅仅表示客户端不再发送数据了但是还能接收数据。</li>
+<li>服务端收到客户端的 <code>FIN</code> 报文时，先回一个 <code>ACK</code> 应答报文，而服务端可能还有数据需要处理和发送，等服务端不再发送数据时，才发送 <code>FIN</code> 报文给客户端来表示同意现在关闭连接。</li>
+</ul>
+<p>通俗理解：<br>主动关闭的 C 方要礼貌一点。<br>C: 我想要关闭连接了    Fin-&gt;S<br>S: 好的我知道了，我在准备关闭，准备好了告诉你 ACK-&gt;C<br>S：我准备好关闭了  FIN-&gt;C<br>C: 好的，那我们关闭吧  ACK-&gt;S  得到这个 ack 后 S close<br>C 等 2MSL 时间再正式关闭<br>MSL：最大报文段生存时间</p>
+<p>每个方向都需要<strong>一个 FIN 和一个 ACK</strong>，因此通常被称为<strong>四次挥手</strong>。<br><strong>只有主动关闭连接的，才有 TIME_WAIT 状态</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="print-no-link">#计算机网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【计算机网络】TCP相关</div>
+      <div>https://zyweven.github.io/2023/03/10/【计算机网络】TCP相关/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>even zhang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/17/%E3%80%90Go%E5%88%B7%E9%A2%98%E3%80%91ACM%E8%BE%93%E5%85%A5/" title="【Go刷题】ACM输入输出">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【Go刷题】ACM输入输出</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/10/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%91HTTP%E7%9B%B8%E5%85%B3/" title="【计算机网络】HTTP相关">
+                        <span class="hidden-mobile">【计算机网络】HTTP相关</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

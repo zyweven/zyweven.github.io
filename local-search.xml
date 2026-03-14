@@ -270,11 +270,11 @@
     
     <tags>
       
+      <tag>AI</tag>
+      
       <tag>OpenClaw</tag>
       
       <tag>Lapis日志</tag>
-      
-      <tag>AI</tag>
       
     </tags>
     
@@ -328,11 +328,11 @@
     
     <tags>
       
+      <tag>AI</tag>
+      
       <tag>OpenClaw</tag>
       
       <tag>Lapis日志</tag>
-      
-      <tag>AI</tag>
       
     </tags>
     
@@ -444,9 +444,9 @@
       
       <tag>Peridot日志</tag>
       
-      <tag>OpenClaw</tag>
-      
       <tag>AI</tag>
+      
+      <tag>OpenClaw</tag>
       
     </tags>
     
@@ -582,31 +582,6 @@
   
   
   <entry>
-    <title>博客迁移记录</title>
-    <link href="/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/"/>
-    <url>/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/</url>
-    
-    <content type="html"><![CDATA[<p>主要参考：</p><p><a href="https://blog.csdn.net/soyawww/article/details/118147820">https://blog.csdn.net/soyawww/article/details/118147820</a></p><p>以及自己之前写的：</p><p><a href="https://zyweven.github.io/2023/02/16/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E7%AE%80%E8%AE%B0/">创建博客过程简记</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>hexo init<br>hexo cl<br>hexo g<br><br>// 安装主题<br>npm install --save hexo-theme-fluid<br><br>// 遇上执行hexo g的时候出现 ERROR Deployer not found: git<br>npm install hexo-deployer-git --save<br><br>// 图片路径有问题无法展示<br>npm install hexo-asset-link --save<br><br>// 压缩CSS,HTML 提升加载速度<br>npm install hexo-clean-css hexo-html-minifier --save<br><br>// 新增了一些插件：<br>npm install hexo-blog-encrypt hexo-wordcount hexo-reading-time --save<br><br>hexo-blog-encrypt 使得可以对一些页面进行简单的加密<br><br></code></pre></td></tr></table></figure><p>hexo-blog-encrypt 扩展阅读：</p><p><a href="https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/">https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/</a><br><a href="https://kakawanyifan.com/10110">https://kakawanyifan.com/10110</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>杂</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Blog</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>mac电脑配置</title>
     <link href="/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/"/>
     <url>/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/</url>
@@ -624,6 +599,31 @@
     <tags>
       
       <tag>Mac</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>博客迁移记录</title>
+    <link href="/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/"/>
+    <url>/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<p>主要参考：</p><p><a href="https://blog.csdn.net/soyawww/article/details/118147820">https://blog.csdn.net/soyawww/article/details/118147820</a></p><p>以及自己之前写的：</p><p><a href="https://zyweven.github.io/2023/02/16/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E7%AE%80%E8%AE%B0/">创建博客过程简记</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>hexo init<br>hexo cl<br>hexo g<br><br>// 安装主题<br>npm install --save hexo-theme-fluid<br><br>// 遇上执行hexo g的时候出现 ERROR Deployer not found: git<br>npm install hexo-deployer-git --save<br><br>// 图片路径有问题无法展示<br>npm install hexo-asset-link --save<br><br>// 压缩CSS,HTML 提升加载速度<br>npm install hexo-clean-css hexo-html-minifier --save<br><br>// 新增了一些插件：<br>npm install hexo-blog-encrypt hexo-wordcount hexo-reading-time --save<br><br>hexo-blog-encrypt 使得可以对一些页面进行简单的加密<br><br></code></pre></td></tr></table></figure><p>hexo-blog-encrypt 扩展阅读：</p><p><a href="https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/">https://www.itfanr.cc/2021/04/16/hexo-blog-article-encryption/</a><br><a href="https://kakawanyifan.com/10110">https://kakawanyifan.com/10110</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Blog</tag>
       
     </tags>
     

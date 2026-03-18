@@ -445,9 +445,9 @@
     
     <tags>
       
-      <tag>AI</tag>
-      
       <tag>OpenClaw</tag>
+      
+      <tag>AI</tag>
       
       <tag>Lapis日志</tag>
       
@@ -503,9 +503,9 @@
     
     <tags>
       
-      <tag>AI</tag>
-      
       <tag>OpenClaw</tag>
+      
+      <tag>AI</tag>
       
       <tag>Lapis日志</tag>
       
@@ -619,9 +619,9 @@
       
       <tag>Peridot日志</tag>
       
-      <tag>AI</tag>
-      
       <tag>OpenClaw</tag>
+      
+      <tag>AI</tag>
       
     </tags>
     
@@ -757,31 +757,6 @@
   
   
   <entry>
-    <title>mac电脑配置</title>
-    <link href="/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/"/>
-    <url>/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/</url>
-    
-    <content type="html"><![CDATA[<p>前段时间运气好抽中了公司的电脑，以1600元的价格买了2020年的intel 芯片的Mac Pro<br>2025年07月27日<br>发现后面公司内购价格从1600降到了1500。。。。。<br><img src="/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/file-20250621220956864.png"></p><p>本来想要卖出去的，可能可以挣个几百元钱。不过有点懒，就暂时留手上自用了。自己也从来没有拥有过属于自己的Mac，而且我的2020年的y7000笔记本已经无法同时满足游戏+开发学习的需求了，所以想着这个Mac自己用来写东西搞开发也不错，win笔记本就纯拿来玩了。</p><h2 id="Mac-配置"><a href="#Mac-配置" class="headerlink" title="Mac 配置"></a>Mac 配置</h2><p>下面记录一下拿到新的Mac电脑进行的一些必要配置。</p><h3 id="常用软件下载"><a href="#常用软件下载" class="headerlink" title="常用软件下载"></a>常用软件下载</h3><p>QQ，微信，百度网盘，有道云笔记，chrome，cursor</p><h4 id="clash"><a href="#clash" class="headerlink" title="clash"></a>clash</h4><p>安装：<a href="https://github.com/clash-verge-rev/clash-verge-rev">https://github.com/clash-verge-rev/clash-verge-rev</a></p><h4 id="hapigo"><a href="#hapigo" class="headerlink" title="hapigo"></a>hapigo</h4><p>主要用截图功能</p><p><a href="https://www.hapigo.com/">https://www.hapigo.com/</a></p><h3 id="开发相关配置"><a href="#开发相关配置" class="headerlink" title="开发相关配置"></a>开发相关配置</h3><h4 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h4><p>安装参考如下</p><p><a href="https://brew.idayer.com/guide/change-source/">https://brew.idayer.com/guide/change-source/</a></p><p>brew 一些常用命令：</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span>search <br><span class="hljs-keyword">brew </span>info <br><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span><br><span class="hljs-keyword">brew </span>remove <br><span class="hljs-keyword">brew </span>update <span class="hljs-comment">#更新 Homebrew </span><br><span class="hljs-keyword">brew </span>outdated <span class="hljs-comment">#查看是否需要更新包 </span><br><span class="hljs-keyword">brew </span>upgrade <span class="hljs-comment">#更新包</span><br></code></pre></td></tr></table></figure><h4 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h4><p>用于管理host配置</p><p><a href="https://github.com/oldj/SwitchHosts/releases">https://github.com/oldj/SwitchHosts/releases</a></p><p>使用：<a href="https://mp.weixin.qq.com/s/A37XnD3HdcGSWUflj6JujQ">https://mp.weixin.qq.com/s/A37XnD3HdcGSWUflj6JujQ</a></p><h4 id="bash自动补全"><a href="#bash自动补全" class="headerlink" title="bash自动补全"></a>bash自动补全</h4><p><a href="https://sourabhbajaj.com/mac-setup/BashCompletion/">https://sourabhbajaj.com/mac-setup/BashCompletion/</a><a href="https://link.juejin.cn/?target=https://sourabhbajaj.com/mac-setup/BashCompletion/"></a></p><p>使用 homebrew 来安装，执行以下命令</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span><span class="hljs-keyword">bash-completion</span><br></code></pre></td></tr></table></figure><p>安装完成，需要在.bash_profile文件中添加代码</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">[ -f <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/etc/</span>bash_completion ] &amp;&amp; . <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/etc/</span>bash_completion<br></code></pre></td></tr></table></figure><p>或者用下面这个方式添加到.bash_profile</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion&quot;</span> &gt;&gt; ~/.bash_profile<br></code></pre></td></tr></table></figure><p>添加后执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure><p>最后重启一下iterm2，即可</p><h4 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h4><p>先复制一份vim配置模板到个人目录下，然后用vi打开这个文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp /usr/share/vim/vimrc ~/.vimrc  #复制文件<br>vi ~/.vimrc  #打开文件<br></code></pre></td></tr></table></figure><p>在文件中追加一下语句</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">set nu! #行号 <br>syntax on #语法高亮 <br>set mouse=a #设置支持鼠标<br></code></pre></td></tr></table></figure><p>保存退出，即完成配置</p><h4 id="访达配置"><a href="#访达配置" class="headerlink" title="访达配置"></a>访达配置</h4><ul><li>在 Finder 标题栏显示完整路径</li></ul><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">defaults write com.apple.finder _FXShowPosixPathInTitle -<span class="hljs-type">bool</span> YES;killall Finder<br></code></pre></td></tr></table></figure><ul><li>还原</li></ul><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">defaults <span class="hljs-keyword">delete</span> com.apple.<span class="hljs-keyword">finder</span> _FXShowPosixPathInTitle;killall Finder<br></code></pre></td></tr></table></figure><h4 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h4><p>brew install mysql</p><p>使用mysql_secure_installation 指令开始mysql 密码等配置。</p><p><a href="https://cloud.tencent.com/developer/article/1868895">https://cloud.tencent.com/developer/article/1868895</a></p><h4 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h4><p>1.安装jdk 17, 8 在官网上仔细看，还是可以找到安装入口的</p><p><a href="https://www.oracle.com/cn/java/technologies/downloads/#jdk24-mac">https://www.oracle.com/cn/java/technologies/downloads/#jdk24-mac</a></p><p>2.使用jenv管理jdk</p><p><a href="https://jasonkayzk.github.io/2023/12/17/%E4%BD%BF%E7%94%A8jenv%E7%AE%A1%E7%90%86jdk%E7%89%88%E6%9C%AC/">https://jasonkayzk.github.io/2023/12/17/%E4%BD%BF%E7%94%A8jenv%E7%AE%A1%E7%90%86jdk%E7%89%88%E6%9C%AC/</a></p><p><a href="https://developer.aliyun.com/article/634454">https://developer.aliyun.com/article/634454</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>杂</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Mac</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>博客迁移记录</title>
     <link href="/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/"/>
     <url>/2025/06/21/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8Ewindows%E8%BF%81%E7%A7%BB%E5%88%B0mac%E8%AE%B0%E5%BD%95/</url>
@@ -799,6 +774,31 @@
     <tags>
       
       <tag>Blog</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>mac电脑配置</title>
+    <link href="/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/"/>
+    <url>/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<p>前段时间运气好抽中了公司的电脑，以1600元的价格买了2020年的intel 芯片的Mac Pro<br>2025年07月27日<br>发现后面公司内购价格从1600降到了1500。。。。。<br><img src="/2025/06/21/Mac%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/file-20250621220956864.png"></p><p>本来想要卖出去的，可能可以挣个几百元钱。不过有点懒，就暂时留手上自用了。自己也从来没有拥有过属于自己的Mac，而且我的2020年的y7000笔记本已经无法同时满足游戏+开发学习的需求了，所以想着这个Mac自己用来写东西搞开发也不错，win笔记本就纯拿来玩了。</p><h2 id="Mac-配置"><a href="#Mac-配置" class="headerlink" title="Mac 配置"></a>Mac 配置</h2><p>下面记录一下拿到新的Mac电脑进行的一些必要配置。</p><h3 id="常用软件下载"><a href="#常用软件下载" class="headerlink" title="常用软件下载"></a>常用软件下载</h3><p>QQ，微信，百度网盘，有道云笔记，chrome，cursor</p><h4 id="clash"><a href="#clash" class="headerlink" title="clash"></a>clash</h4><p>安装：<a href="https://github.com/clash-verge-rev/clash-verge-rev">https://github.com/clash-verge-rev/clash-verge-rev</a></p><h4 id="hapigo"><a href="#hapigo" class="headerlink" title="hapigo"></a>hapigo</h4><p>主要用截图功能</p><p><a href="https://www.hapigo.com/">https://www.hapigo.com/</a></p><h3 id="开发相关配置"><a href="#开发相关配置" class="headerlink" title="开发相关配置"></a>开发相关配置</h3><h4 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h4><p>安装参考如下</p><p><a href="https://brew.idayer.com/guide/change-source/">https://brew.idayer.com/guide/change-source/</a></p><p>brew 一些常用命令：</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span>search <br><span class="hljs-keyword">brew </span>info <br><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span><br><span class="hljs-keyword">brew </span>remove <br><span class="hljs-keyword">brew </span>update <span class="hljs-comment">#更新 Homebrew </span><br><span class="hljs-keyword">brew </span>outdated <span class="hljs-comment">#查看是否需要更新包 </span><br><span class="hljs-keyword">brew </span>upgrade <span class="hljs-comment">#更新包</span><br></code></pre></td></tr></table></figure><h4 id="SwitchHosts"><a href="#SwitchHosts" class="headerlink" title="SwitchHosts"></a>SwitchHosts</h4><p>用于管理host配置</p><p><a href="https://github.com/oldj/SwitchHosts/releases">https://github.com/oldj/SwitchHosts/releases</a></p><p>使用：<a href="https://mp.weixin.qq.com/s/A37XnD3HdcGSWUflj6JujQ">https://mp.weixin.qq.com/s/A37XnD3HdcGSWUflj6JujQ</a></p><h4 id="bash自动补全"><a href="#bash自动补全" class="headerlink" title="bash自动补全"></a>bash自动补全</h4><p><a href="https://sourabhbajaj.com/mac-setup/BashCompletion/">https://sourabhbajaj.com/mac-setup/BashCompletion/</a><a href="https://link.juejin.cn/?target=https://sourabhbajaj.com/mac-setup/BashCompletion/"></a></p><p>使用 homebrew 来安装，执行以下命令</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span><span class="hljs-keyword">bash-completion</span><br></code></pre></td></tr></table></figure><p>安装完成，需要在.bash_profile文件中添加代码</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">[ -f <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/etc/</span>bash_completion ] &amp;&amp; . <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/etc/</span>bash_completion<br></code></pre></td></tr></table></figure><p>或者用下面这个方式添加到.bash_profile</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion&quot;</span> &gt;&gt; ~/.bash_profile<br></code></pre></td></tr></table></figure><p>添加后执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure><p>最后重启一下iterm2，即可</p><h4 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h4><p>先复制一份vim配置模板到个人目录下，然后用vi打开这个文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp /usr/share/vim/vimrc ~/.vimrc  #复制文件<br>vi ~/.vimrc  #打开文件<br></code></pre></td></tr></table></figure><p>在文件中追加一下语句</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">set nu! #行号 <br>syntax on #语法高亮 <br>set mouse=a #设置支持鼠标<br></code></pre></td></tr></table></figure><p>保存退出，即完成配置</p><h4 id="访达配置"><a href="#访达配置" class="headerlink" title="访达配置"></a>访达配置</h4><ul><li>在 Finder 标题栏显示完整路径</li></ul><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">defaults write com.apple.finder _FXShowPosixPathInTitle -<span class="hljs-type">bool</span> YES;killall Finder<br></code></pre></td></tr></table></figure><ul><li>还原</li></ul><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">defaults <span class="hljs-keyword">delete</span> com.apple.<span class="hljs-keyword">finder</span> _FXShowPosixPathInTitle;killall Finder<br></code></pre></td></tr></table></figure><h4 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h4><p>brew install mysql</p><p>使用mysql_secure_installation 指令开始mysql 密码等配置。</p><p><a href="https://cloud.tencent.com/developer/article/1868895">https://cloud.tencent.com/developer/article/1868895</a></p><h4 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h4><p>1.安装jdk 17, 8 在官网上仔细看，还是可以找到安装入口的</p><p><a href="https://www.oracle.com/cn/java/technologies/downloads/#jdk24-mac">https://www.oracle.com/cn/java/technologies/downloads/#jdk24-mac</a></p><p>2.使用jenv管理jdk</p><p><a href="https://jasonkayzk.github.io/2023/12/17/%E4%BD%BF%E7%94%A8jenv%E7%AE%A1%E7%90%86jdk%E7%89%88%E6%9C%AC/">https://jasonkayzk.github.io/2023/12/17/%E4%BD%BF%E7%94%A8jenv%E7%AE%A1%E7%90%86jdk%E7%89%88%E6%9C%AC/</a></p><p><a href="https://developer.aliyun.com/article/634454">https://developer.aliyun.com/article/634454</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Mac</tag>
       
     </tags>
     
@@ -1429,11 +1429,11 @@
     
     <tags>
       
+      <tag>Ubuntu</tag>
+      
       <tag>python</tag>
       
       <tag>深度学习</tag>
-      
-      <tag>Ubuntu</tag>
       
     </tags>
     
